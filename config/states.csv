@@ -1,0 +1,4 @@
+state,search_url,source_type
+MA,https://malegislature.gov/Search/FindMyLegislation,legislature
+NY,https://www.nysenate.gov/legislation/bills/search,legislature
+CA,https://leginfo.legislature.ca.gov/faces/billSearchClient.xhtml,legislature
