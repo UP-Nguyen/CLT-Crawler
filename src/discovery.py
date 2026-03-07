@@ -1,14 +1,13 @@
 import time
 import requests
+import pandas as pd
 from tenacity import retry, stop_after_attempt, wait_exponential
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-
 
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 }
+
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
@@ -25,89 +24,64 @@ def fetch_page(url, params=None):
     print(f"STATUS: {response.status_code}")
 
     response.raise_for_status()
-    time.sleep(2)
+    time.sleep(1)
     return response
 
-# manual seed list approach.
-# discovery is still simple, but now it can return actual candidate pages
-# fetch_page is reusable
-# discover is clearly separated from extraction
-# can add actual seed URLs state by state
 
-""" def discover_candidates(search_url, keyword, state):
-    manual_candidates = {
-        "CA": [
-            {
-                "title": "California Legislative Information Home",
-                "url": "https://leginfo.legislature.ca.gov/faces/home.xhtml",
-                "snippet": "General California legislative information page"
-            }
-        ]
-    }
+def load_seed_csv(path, keyword=None):
+    df = pd.read_csv(path)
 
-    state_candidates = manual_candidates.get(state, [])
+    if keyword:
+        keyword_lower = keyword.lower().strip()
+        df = df[df["keyword"].str.lower().str.strip() == keyword_lower]
 
-    return [
-        {
-            "state": state,
-            "keyword": keyword,
-            "candidate_url": item["url"],
-            "candidate_title": item["title"],
-            "snippet": item["snippet"],
-        }
-        for item in state_candidates
-    ] """
+    return df.to_dict(orient="records")
 
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
 
-""" def discover_candidates(search_url, keyword, state):
-    response = fetch_page(search_url)
-    soup = BeautifulSoup(response.text, "xml")
+def discover_ca_bills(keyword):
+    return load_seed_csv("config/ca_bill_seeds.csv", keyword=keyword)
+
+
+def discover_ca_codes(keyword):
+    # For now, exact keyword match. TODO loosen this.
+    return load_seed_csv("config/ca_code_seeds.csv", keyword=keyword)
+
+
+def discover_ca_policies(keyword):
+    return load_seed_csv("config/ca_policy_seeds.csv", keyword=keyword)
+
+
+# create candidates I have not seeded
+def discover_ca_bills_by_enumeration(keyword, start_num=1, end_num=300):
+    """
+    Generate candidate California bill URLs without seeding them manually.
+    Start small for testing.
+    """
+    session_prefix = "20252026"
+    bill_types = ["AB"]  # keep this small first; later add SB, ACA, etc.
 
     candidates = []
-    seen_urls = set()
 
-    for link in soup.find_all("a", href=True):
-        title = " ".join(link.get_text(" ", strip=True).split())
-        href = link["href"]
-        full_url = urljoin(search_url, href)
+    for bill_type in bill_types:
+        for number in range(start_num, end_num + 1):
+            bill_id = f"{session_prefix}{bill_type}{number}"
+            url = f"https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id={bill_id}"
 
-        # only keep actual CA bill detail pages
-        if "billTextClient.xhtml?bill_id=" not in full_url:
-            continue
+            candidates.append({
+                "state": "CA",
+                "keyword": keyword,
+                "source_type": "legislature site",
+                "candidate_url": url,
+                "candidate_title": f"{bill_type} {number}",
+                "snippet": "Generated CA bill candidate",
+            })
 
-        if full_url in seen_urls:
-            continue
-        seen_urls.add(full_url)
+    print(f"Generated {len(candidates)} CA bill candidates for keyword: {keyword}")
+    return candidates
 
-        candidates.append({
-            "state": state,
-            "keyword": keyword,
-            "candidate_url": full_url,
-            "candidate_title": title if title else full_url,
-            "snippet": "",
-        })
-
-    print("Filtered candidates:")
-    for c in candidates[:10]:
-        print(c["candidate_title"], "->", c["candidate_url"])
-
-    return candidates """
 
 def discover_candidates(search_url, keyword, state):
-    manual_candidates = [
-        {
-            "state": "CA",
-            "keyword": keyword,
-            "candidate_url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260AB2399",
-            "candidate_title": "AB 2399 Real property tax: welfare exemption: community land trusts.",
-            "snippet": "Seeded real bill page"
-        }
-    ]
+    if state != "CA":
+        return []
 
-    print("Filtered candidates:")
-    for c in manual_candidates:
-        print(c["candidate_title"], "->", c["candidate_url"])
-
-    return manual_candidates
+    return discover_ca_bills_by_enumeration(keyword, start_num=1, end_num=300)

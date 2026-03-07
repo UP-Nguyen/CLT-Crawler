@@ -36,3 +36,28 @@ Airtable
 5. Visit each bill detail page
 
 Example: https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260AB2399
+
+
+# 3/7/26 California prototype
+seed files > discovery adapters > extraction > normalize > findings_export.csv ?
+
+Phase 1
+Generate many possible California bill URLs automatically.
+
+Phase 2
+Visit them and detect which are real.
+
+Phase 3
+
+Filter by  keywords.
+
+seeded file processor > actual crawler 
+Progression
+
+FLOW
+generate bill URLs
+fetch page
+check if it is a real bill
+check if it matches your keyword
+send to extraction/normalize
+save findings_export.csv

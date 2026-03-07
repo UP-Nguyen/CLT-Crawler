@@ -34,7 +34,7 @@ def normalize_record(discovery_row, extracted_row):
 
     normalized = {
         "state": discovery_row["state"],
-        "source_type": "legislature site",
+        "source_type": discovery_row.get("source_type", "unknown"),
         "source_url": extracted_row["source_url"],
         "title": extracted_row.get("title", ""),
         "identifier": extracted_row.get("identifier", ""),

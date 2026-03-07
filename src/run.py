@@ -32,7 +32,7 @@ def run_pipeline():
                 try:
                     extracted = extract_page_fields(
                         candidate["candidate_url"],
-                        source_type=source_type
+                        source_type=candidate.get("source_type", source_type)
                     )
                     normalized = normalize_record(candidate, extracted)
                     all_normalized.append(normalized)
