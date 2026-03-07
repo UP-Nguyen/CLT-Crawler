@@ -83,18 +83,19 @@ def extract_status(text):
 
 
 def looks_like_real_ca_bill(text):
-    """
-    Reject junk pages; keep actual bill pages.
-    """
     text_lower = text.lower()
 
     bill_signals = [
-        "legislative counsel's digest",
+        "legislative counsel",
         "introduced by",
-        "an act to",
-        "assembly bill",
-        "senate bill",
+        "an act to amend",
+        "an act to add",
         "bill text",
+        "digest",
+        "vote:",
+        "appropriation:",
+        "fiscal committee:",
+        "state-mandated local program:",
     ]
 
     return any(signal in text_lower for signal in bill_signals)
@@ -111,6 +112,10 @@ def matches_keyword(text, keyword):
         "surplus land": [
             "surplus land",
             "surplus lands",
+        ],
+        "shared equity": [
+            "shared equity",
+            "shared-equity",
         ],
     }
 

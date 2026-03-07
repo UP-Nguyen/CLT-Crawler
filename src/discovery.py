@@ -1,13 +1,11 @@
 import time
 import requests
-import pandas as pd
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 }
-
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
@@ -28,37 +26,17 @@ def fetch_page(url, params=None):
     return response
 
 
-def load_seed_csv(path, keyword=None):
-    df = pd.read_csv(path)
-
-    if keyword:
-        keyword_lower = keyword.lower().strip()
-        df = df[df["keyword"].str.lower().str.strip() == keyword_lower]
-
-    return df.to_dict(orient="records")
-
-
-def discover_ca_bills(keyword):
-    return load_seed_csv("config/ca_bill_seeds.csv", keyword=keyword)
-
-
-def discover_ca_codes(keyword):
-    # For now, exact keyword match. TODO loosen this.
-    return load_seed_csv("config/ca_code_seeds.csv", keyword=keyword)
-
-
-def discover_ca_policies(keyword):
-    return load_seed_csv("config/ca_policy_seeds.csv", keyword=keyword)
-
-
-# create candidates I have not seeded
-def discover_ca_bills_by_enumeration(keyword, start_num=1, end_num=300):
+def discover_ca_bills_by_enumeration(
+    keyword,
+    start_num=1,
+    end_num=300,
+    bill_types=None,
+):
     """
     Generate candidate California bill URLs without seeding them manually.
-    Start small for testing.
     """
     session_prefix = "202520260"
-    bill_types = ["AB", "SB"]  # keep this small first; later add SB, ACA, etc.
+    bill_types = bill_types or ["AB", "SB"]
 
     candidates = []
 
@@ -76,7 +54,10 @@ def discover_ca_bills_by_enumeration(keyword, start_num=1, end_num=300):
                 "snippet": "Generated CA bill candidate",
             })
 
-    print(f"Generated {len(candidates)} CA bill candidates for keyword: {keyword}")
+    print(
+        f"Generated {len(candidates)} CA bill candidates for keyword: {keyword} "
+        f"({', '.join(bill_types)} {start_num}-{end_num})"
+    )
     return candidates
 
 
@@ -84,4 +65,10 @@ def discover_candidates(search_url, keyword, state):
     if state != "CA":
         return []
 
-    return discover_ca_bills_by_enumeration(keyword, start_num=1, end_num=4000)
+    # Change these chunk boundaries as needed
+    return discover_ca_bills_by_enumeration(
+        keyword=keyword,
+        start_num=2300,
+        end_num=2450,
+        bill_types=["AB", "SB"],
+    )

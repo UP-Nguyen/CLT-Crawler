@@ -10,11 +10,12 @@ def run_pipeline():
     keywords_df = pd.read_csv("config/keywords.csv")
 
     all_normalized = []
+    crawl_log = []
 
     for _, state_row in states_df.iterrows():
         state = state_row["state"]
         search_url = state_row["search_url"]
-        source_type = state_row["source_type"]
+        default_source_type = state_row["source_type"]
 
         for _, keyword_row in keywords_df.iterrows():
             keyword = keyword_row["keyword"]
@@ -28,27 +29,36 @@ def run_pipeline():
                 print(f"Discovery failed for {state} | {keyword}: {e}")
                 continue
 
-            for candidate in candidates:
+            for i, candidate in enumerate(candidates, start=1):
                 try:
                     extracted = extract_page_fields(
                         candidate["candidate_url"],
-                        source_type=candidate.get("source_type", source_type)
+                        source_type=candidate.get("source_type", default_source_type)
                     )
 
                     raw_text = extracted.get("raw_text", "")
+                    is_real_bill = looks_like_real_ca_bill(raw_text)
+                    keyword_hit = matches_keyword(raw_text, keyword)
 
-                    print("CHECKING:", candidate["candidate_url"])
-                    print("TITLE:", extracted.get("title"))
-                    print("IDENTIFIER:", extracted.get("identifier"))
-                    print("STATUS:", extracted.get("status"))
-                    print("REAL BILL?", looks_like_real_ca_bill(raw_text))
-                    print("MATCHES KEYWORD?", matches_keyword(raw_text, keyword))
-                    print("-" * 80)
+                    crawl_log.append({
+                        "state": candidate.get("state", state),
+                        "keyword": keyword,
+                        "candidate_title": candidate.get("candidate_title", ""),
+                        "candidate_url": candidate.get("candidate_url", ""),
+                        "extracted_title": extracted.get("title", ""),
+                        "identifier": extracted.get("identifier", ""),
+                        "status": extracted.get("status", ""),
+                        "is_real_bill": is_real_bill,
+                        "matches_keyword": keyword_hit,
+                    })
 
-                    if not looks_like_real_ca_bill(raw_text):
+                    if i % 25 == 0:
+                        print(f"Checked {i} candidates for {state} | {keyword}")
+
+                    if not is_real_bill:
                         continue
 
-                    if not matches_keyword(raw_text, keyword):
+                    if not keyword_hit:
                         continue
 
                     normalized = normalize_record(candidate, extracted)
@@ -57,19 +67,45 @@ def run_pipeline():
                     print(f"MATCH: {normalized['identifier']} -> {normalized['source_url']}")
 
                 except Exception as e:
+                    crawl_log.append({
+                        "state": candidate.get("state", state),
+                        "keyword": keyword,
+                        "candidate_title": candidate.get("candidate_title", ""),
+                        "candidate_url": candidate.get("candidate_url", ""),
+                        "extracted_title": "",
+                        "identifier": "",
+                        "status": "",
+                        "is_real_bill": False,
+                        "matches_keyword": False,
+                        "error": str(e),
+                    })
                     print(f"Extraction failed for {candidate['candidate_url']}: {e}")
 
+    # Always save crawl log
+    crawl_log_df = pd.DataFrame(crawl_log)
+    save_csv(crawl_log_df.to_dict(orient="records"), "data/exports/crawl_log.csv")
+
+    # Save matched findings
     if all_normalized:
-        df = pd.DataFrame(all_normalized).drop_duplicates(
+        findings_df = pd.DataFrame(all_normalized).drop_duplicates(
             subset=["state", "source_url", "identifier", "airtable_category"]
         )
-        records = df.to_dict(orient="records")
+        findings_records = findings_df.to_dict(orient="records")
 
-        save_csv(records, "data/exports/findings_export.csv")
-        save_sqlite(records)
-        print(f"\nSaved {len(records)} matching records.")
+        save_csv(findings_records, "data/exports/findings_export.csv")
+        save_sqlite(findings_records)
+        print(f"\nSaved {len(findings_records)} matching records.")
     else:
         print("\nNo matching records found.")
+
+    # Summary
+    if not crawl_log_df.empty:
+        real_bill_count = int(crawl_log_df["is_real_bill"].fillna(False).sum())
+        keyword_match_count = int(crawl_log_df["matches_keyword"].fillna(False).sum())
+        print(f"Total candidates checked: {len(crawl_log_df)}")
+        print(f"Real bills found: {real_bill_count}")
+        print(f"Keyword matches found: {keyword_match_count}")
+        print("Saved crawl log to data/exports/crawl_log.csv")
 
 
 if __name__ == "__main__":
