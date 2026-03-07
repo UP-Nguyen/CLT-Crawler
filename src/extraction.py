@@ -63,34 +63,64 @@ def extract_identifier(url, title, text):
 
 def extract_status(text):
     text_lower = text.lower()
+
     if "introduced by" in text_lower:
         return "Introduced"
-    if "introduced" in text_lower:
-        return "Introduced"
+    if "amended in" in text_lower:
+        return "Amended"
+    if "chaptered" in text_lower:
+        return "Enacted / Current law"
+    if "approved by governor" in text_lower:
+        return "Enacted / Current law"
+    if "passed the assembly" in text_lower or "passed the senate" in text_lower:
+        return "Passed"
     if "in committee" in text_lower:
         return "In committee"
-    if "passed" in text_lower:
-        return "Passed"
-    if "enacted" in text_lower or "current law" in text_lower:
-        return "Enacted / Current law"
+    if "introduced" in text_lower:
+        return "Introduced"
+
     return "Unknown"
 
 
-def extract_page_fields(url, source_type="legislature"):
-    # crude PDF handling for now
-    if url.lower().endswith(".pdf"):
-        title = url.split("/")[-1]
-        return {
-            "source_url": url,
-            "title": title,
-            "identifier": extract_identifier(url, title, ""),
-            "status": "Unknown",
-            "summary_snippet": "PDF source - manual review needed",
-            "raw_text": "",
-        }
+def looks_like_real_ca_bill(text):
+    """
+    Reject junk pages; keep actual bill pages.
+    """
+    text_lower = text.lower()
 
+    bill_signals = [
+        "legislative counsel's digest",
+        "introduced by",
+        "an act to",
+        "assembly bill",
+        "senate bill",
+        "bill text",
+    ]
+
+    return any(signal in text_lower for signal in bill_signals)
+
+
+def matches_keyword(text, keyword):
+    text_lower = text.lower()
+
+    keyword_map = {
+        "community land trust": [
+            "community land trust",
+            "community land trusts",
+        ],
+        "surplus land": [
+            "surplus land",
+            "surplus lands",
+        ],
+    }
+
+    phrases = keyword_map.get(keyword.lower(), [keyword.lower()])
+    return any(phrase in text_lower for phrase in phrases)
+
+
+def extract_page_fields(url, source_type="legislature"):
     response = fetch_page(url)
-    soup = BeautifulSoup(response.text, "xml")
+    soup = BeautifulSoup(response.text, "lxml")
 
     text = clean_text(soup.get_text(" ", strip=True))
 

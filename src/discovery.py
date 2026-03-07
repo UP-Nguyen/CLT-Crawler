@@ -57,8 +57,8 @@ def discover_ca_bills_by_enumeration(keyword, start_num=1, end_num=300):
     Generate candidate California bill URLs without seeding them manually.
     Start small for testing.
     """
-    session_prefix = "20252026"
-    bill_types = ["AB"]  # keep this small first; later add SB, ACA, etc.
+    session_prefix = "202520260"
+    bill_types = ["AB", "SB"]  # keep this small first; later add SB, ACA, etc.
 
     candidates = []
 
@@ -84,4 +84,4 @@ def discover_candidates(search_url, keyword, state):
     if state != "CA":
         return []
 
-    return discover_ca_bills_by_enumeration(keyword, start_num=1, end_num=300)
+    return discover_ca_bills_by_enumeration(keyword, start_num=1, end_num=4000)
