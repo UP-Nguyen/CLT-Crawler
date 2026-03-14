@@ -116,14 +116,17 @@ def matches_keyword(text, keyword):
         "community land trust": [
             "community land trust",
             "community land trusts",
+            "clt",
         ],
         "surplus land": [
             "surplus land",
             "surplus lands",
+            "public land",
         ],
         "shared equity": [
             "shared equity",
             "shared-equity",
+            "equity model",
         ],
     }
 

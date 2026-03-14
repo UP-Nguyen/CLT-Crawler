@@ -80,54 +80,53 @@ def discover_ca_bills_by_enumeration(
     return candidates
 
 
-def discover_ny_bills_via_api(keyword, session_year="2025", limit=25):
+def discover_ny_bills_via_api(keyword, session_years=None, limit=25):
     api_key = os.getenv("NY_OPENLEG_KEY")
     if not api_key:
         raise ValueError("Missing NY_OPENLEG_KEY environment variable.")
 
-    url = f"https://legislation.nysenate.gov/api/3/bills/{session_year}/search"
-    params = {
-        "key": api_key,
-        "term": keyword,
-        "limit": limit,
-    }
-
-    data = fetch_json(url, params=params)
-
-    items = data.get("result", {}).get("items", [])
+    session_years = session_years or ["2025", "2023"]
     candidates = []
 
-    for item in items:
-        result = item.get("result", {})
-        base_print_no = result.get("basePrintNo", "")
-        title = result.get("title", "")
-        summary = result.get("summary", "")
-        status_desc = result.get("status", {}).get("statusDesc", "")
-        sponsor = result.get("sponsor", {}).get("member", {}) or {}
-        sponsor_name = sponsor.get("fullName", "")
+    for session_year in session_years:
+        url = f"https://legislation.nysenate.gov/api/3/bills/{session_year}/search"
+        params = {
+            "key": api_key,
+            "term": keyword,
+            "limit": limit,
+        }
 
-        if not base_print_no:
-            continue
+        data = fetch_json(url, params=params)
+        items = data.get("result", {}).get("items", [])
 
-        bill_url = f"https://legislation.nysenate.gov/api/3/bills/{session_year}/{base_print_no}"
+        for item in items:
+            result = item.get("result", {})
+            base_print_no = result.get("basePrintNo", "")
+            title = result.get("title", "")
+            summary = result.get("summary", "")
+            status_desc = result.get("status", {}).get("statusDesc", "")
 
-        candidates.append({
-            "state": "NY",
-            "keyword": keyword,
-            "source_type": "legislature api",
-            "candidate_url": bill_url,
-            "candidate_title": f"{base_print_no} {title}".strip(),
-            "snippet": summary,
-            "api_payload": {
-                "session": session_year,
-                "basePrintNo": base_print_no,
-                "title": title,
-                "summary": summary,
-                "statusDesc": status_desc,
-                "sponsorName": sponsor_name,
-                "raw_search_result": result,
-            },
-        })
+            if not base_print_no:
+                continue
+
+            bill_url = f"https://legislation.nysenate.gov/api/3/bills/{session_year}/{base_print_no}"
+
+            candidates.append({
+                "state": "NY",
+                "keyword": keyword,
+                "source_type": "legislature api",
+                "candidate_url": bill_url,
+                "candidate_title": f"{base_print_no} {title}".strip(),
+                "snippet": summary,
+                "api_payload": {
+                    "session": session_year,
+                    "basePrintNo": base_print_no,
+                    "title": title,
+                    "summary": summary,
+                    "statusDesc": status_desc,
+                    "raw_search_result": result,
+                },
+            })
 
     print(f"Generated {len(candidates)} NY API candidates for keyword: {keyword}")
     return candidates
@@ -145,8 +144,8 @@ def discover_candidates(search_url, keyword, state):
     if state == "NY":
         return discover_ny_bills_via_api(
             keyword=keyword,
-            session_year="2025",
-            limit=25,
+            session_years=["2025","2024", "2023"],
+            limit=50,
         )
 
     return []

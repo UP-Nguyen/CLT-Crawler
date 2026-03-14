@@ -29,5 +29,5 @@ def save_sqlite(records, db_path="data/processed/clt_crawler.db", table_name="fi
     df = pd.DataFrame(records)
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     conn = sqlite3.connect(db_path)
-    df.to_sql(table_name, conn, if_exists="append", index=False)
+    df.to_sql(table_name, conn, if_exists="replace", index=False)
     conn.close()

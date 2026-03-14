@@ -11,6 +11,7 @@ def infer_confidence(raw_text, keywords_matched):
         return "Medium"
     return "Low"
 
+
 def map_keyword_category(keyword):
     keyword = keyword.lower()
     if "community land trust" in keyword or "shared equity" in keyword:
@@ -29,8 +30,14 @@ def map_keyword_category(keyword):
         return "Affordability Covenants"
     return "Uncategorized"
 
+
+def make_content_hash(text):
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
 def normalize_record(discovery_row, extracted_row):
     keywords = [discovery_row["keyword"]]
+    api_payload = discovery_row.get("api_payload") or {}
 
     normalized = {
         "state": discovery_row["state"],
@@ -46,10 +53,7 @@ def normalize_record(discovery_row, extracted_row):
         "notes": "",
         "airtable_category": map_keyword_category(discovery_row["keyword"]),
         "content_hash": make_content_hash(extracted_row.get("raw_text", "")),
+        "session": api_payload.get("session", ""),
     }
 
     return normalized
-
-def make_content_hash(text):
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
-

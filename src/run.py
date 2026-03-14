@@ -3,6 +3,7 @@ from discovery import discover_candidates
 from extraction import extract_page_fields, looks_like_real_bill, matches_keyword
 from normalize import normalize_record
 from storage import save_csv, save_sqlite
+from datetime import datetime
 
 
 def run_pipeline():
@@ -81,9 +82,23 @@ def run_pipeline():
                     })
                     print(f"Extraction failed for {candidate['candidate_url']}: {e}")
 
+    findings_df = pd.DataFrame(all_normalized)
+
+    if not findings_df.empty:
+        print("\nMatches by state:")
+        print(findings_df["state"].value_counts())
+
+    if all_normalized:
+        findings_df = pd.DataFrame(all_normalized).drop_duplicates(
+            subset=["state", "source_url", "identifier", "airtable_category"]
+        )
+        print("\nMatches by state:")
+        print(findings_df["state"].value_counts())
+
     # Always save crawl log
     crawl_log_df = pd.DataFrame(crawl_log)
-    save_csv(crawl_log_df.to_dict(orient="records"), "data/exports/crawl_log.csv")
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     # Save matched findings
     if all_normalized:
@@ -93,19 +108,11 @@ def run_pipeline():
         findings_records = findings_df.to_dict(orient="records")
 
         save_csv(findings_records, "data/exports/findings_export.csv")
+        save_csv(findings_records, f"data/exports/findings_export_{timestamp}.csv")
         save_sqlite(findings_records)
         print(f"\nSaved {len(findings_records)} matching records.")
     else:
         print("\nNo matching records found.")
-
-    # Summary
-    if not crawl_log_df.empty:
-        real_bill_count = int(crawl_log_df["is_real_bill"].fillna(False).sum())
-        keyword_match_count = int(crawl_log_df["matches_keyword"].fillna(False).sum())
-        print(f"Total candidates checked: {len(crawl_log_df)}")
-        print(f"Real bills found: {real_bill_count}")
-        print(f"Keyword matches found: {keyword_match_count}")
-        print("Saved crawl log to data/exports/crawl_log.csv")
 
 
 if __name__ == "__main__":
