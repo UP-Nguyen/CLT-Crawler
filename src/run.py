@@ -4,12 +4,12 @@ from discovery import discover_candidates
 from extraction import extract_page_fields, looks_like_real_bill, matches_keyword
 from normalize import normalize_record
 from storage import save_csv, save_sqlite
+from pathlib import Path
 
 
 DEBUG_STATES = []
 DEBUG_KEYWORDS = []
 SAVE_SQLITE = True
-
 
 def run_pipeline():
     states_df = pd.read_csv("config/states.csv")
@@ -102,9 +102,20 @@ def run_pipeline():
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
+
+    exports_dir = Path("data/exports")
+    archive_crawl_dir = exports_dir / "archive" / "crawl_log"
+    archive_findings_dir = exports_dir / "archive" / "findings_export"
+
+    archive_crawl_dir.mkdir(parents=True, exist_ok=True)
+    archive_findings_dir.mkdir(parents=True, exist_ok=True)
+
     crawl_log_df = pd.DataFrame(crawl_log)
-    save_csv(crawl_log_df.to_dict(orient="records"), "data/exports/crawl_log.csv")
-    save_csv(crawl_log_df.to_dict(orient="records"), f"data/exports/crawl_log_{timestamp}.csv")
+    save_csv(crawl_log_df.to_dict(orient="records"), str(exports_dir / "crawl_log.csv"))
+    save_csv(
+        crawl_log_df.to_dict(orient="records"),
+        str(archive_crawl_dir / f"crawl_log_{timestamp}.csv")
+    )
 
     if all_normalized:
         findings_df = pd.DataFrame(all_normalized).drop_duplicates(
@@ -112,8 +123,11 @@ def run_pipeline():
         )
         findings_records = findings_df.to_dict(orient="records")
 
-        save_csv(findings_records, "data/exports/findings_export.csv")
-        save_csv(findings_records, f"data/exports/findings_export_{timestamp}.csv")
+        save_csv(findings_records, str(exports_dir / "findings_export.csv"))
+        save_csv(
+            findings_records,
+            str(archive_findings_dir / f"findings_export_{timestamp}.csv")
+        )
 
         if SAVE_SQLITE:
             save_sqlite(findings_records)
@@ -123,14 +137,6 @@ def run_pipeline():
         print(findings_df["state"].value_counts())
     else:
         print("\nNo matching records found.")
-
-    if not crawl_log_df.empty:
-        real_bill_count = int(crawl_log_df["is_real_bill"].fillna(False).sum())
-        keyword_match_count = int(crawl_log_df["matches_keyword"].fillna(False).sum())
-        print(f"Total candidates checked: {len(crawl_log_df)}")
-        print(f"Real bills/statutes found: {real_bill_count}")
-        print(f"Keyword matches found: {keyword_match_count}")
-        print("Saved crawl log to data/exports/crawl_log.csv")
 
 
 if __name__ == "__main__":

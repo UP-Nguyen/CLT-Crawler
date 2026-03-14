@@ -161,36 +161,31 @@ def discover_vt_bills_by_enumeration(keyword, sessions=None, start_num=1, end_nu
     return candidates
 
 
-def discover_vt_statute_seeds(keyword):
-    return [
-        {
-            "state": "VT",
-            "keyword": keyword,
-            "source_type": "code site",
-            "candidate_url": "https://legislature.vermont.gov/statutes/section/10/015/00321",
-            "candidate_title": "10 V.S.A. § 321",
-            "snippet": "Shared appreciation and/or community land trust demonstration program",
-            "api_payload": None,
-        },
-        {
-            "state": "VT",
-            "keyword": keyword,
-            "source_type": "code site",
-            "candidate_url": "https://legislature.vermont.gov/statutes/section/32/125/03847",
-            "candidate_title": "32 V.S.A. § 3847",
-            "snippet": "Neighborhood development area tax credit",
-            "api_payload": None,
-        },
-        {
-            "state": "VT",
-            "keyword": keyword,
-            "source_type": "code site",
-            "candidate_url": "https://legislature.vermont.gov/statutes/section/24/117/04303",
-            "candidate_title": "24 V.S.A. § 4303",
-            "snippet": "Affordable housing development / covenants or restrictions preserving affordability",
-            "api_payload": None,
-        },
-    ]
+def discover_ma_bills_by_enumeration(keyword, general_court="194", start_num=1, end_num=100, bill_types=None):
+    bill_types = bill_types or ["H", "S"]
+    candidates = []
+
+    for bill_type in bill_types:
+        for number in range(start_num, end_num + 1):
+            url = f"https://malegislature.gov/Bills/{general_court}/{bill_type}{number}"
+            candidates.append({
+                "state": "MA",
+                "keyword": keyword,
+                "source_type": "legislature site",
+                "candidate_url": url,
+                "candidate_title": f"{bill_type}{number}",
+                "snippet": f"Generated MA bill candidate for General Court {general_court}",
+                "api_payload": {"session": general_court},
+            })
+
+    print(
+        f"Generated {len(candidates)} MA bill candidates for keyword: {keyword} "
+        f"({general_court} | {', '.join(bill_types)} {start_num}-{end_num})"
+    )
+    return candidates
+
+
+
 
 
 def discover_candidates(search_url, keyword, state):
@@ -218,7 +213,15 @@ def discover_candidates(search_url, keyword, state):
                 end_num=100,
                 bill_types=["H", "S"],
             )
-            + discover_vt_statute_seeds(keyword)
+        )
+    
+    if state == "MA":
+        return discover_ma_bills_by_enumeration(
+            keyword=keyword,
+            general_court="194",
+            start_num=1,
+            end_num=50,
+            bill_types=["H", "S"],
         )
 
     return []

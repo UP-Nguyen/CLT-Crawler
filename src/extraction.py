@@ -33,6 +33,20 @@ def extract_identifier_from_url(url):
         title_num = vt_statute_match.group(1)
         section_num = str(int(vt_statute_match.group(3)))  # 04303 -> 4303
         return f"{title_num} V.S.A. § {section_num}"
+    
+    ma_bill_match = re.search(r"/Bills/(\d+)/([HS]\d+)$", url, re.IGNORECASE)
+    if ma_bill_match:
+        return ma_bill_match.group(2).upper()
+
+    ma_statute_match = re.search(
+        r"/Laws/GeneralLaws/Part([IVX]+)/Title([IVX]+)/Chapter(\d+[A-Z]?)/Section(\d+[A-Z]?)",
+        url,
+        re.IGNORECASE,
+    )
+    if ma_statute_match:
+        chapter_num = ma_statute_match.group(3)
+        section_num = ma_statute_match.group(4)
+        return f"MGL c.{chapter_num} §{section_num}"    
 
     return None
 
@@ -139,6 +153,12 @@ def looks_like_real_bill(text):
         "senate bill",
         "act relating to",
         "bill as introduced",
+        "bill information",
+        "view text",
+        "print preview",
+        "download pdf",
+        "general laws",
+        "section 60",
     ]
 
     statute_signals = [
@@ -167,8 +187,9 @@ def matches_keyword(text, keyword):
             "permanent affordability",
             "resale restriction",
             "affordability",
-            "affordable housing development",
-            "covenants or restrictions",
+            "affordable housing",
+            "housing tax increment financing",
+            "workforce housing",
         ],
         "surplus land": [
             "surplus land",
