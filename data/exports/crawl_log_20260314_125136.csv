@@ -1,0 +1,404 @@
+state,keyword,candidate_title,candidate_url,extracted_title,identifier,status,is_real_bill,matches_keyword
+VT,community land trust,H.1,https://legislature.vermont.gov/bill/status/2026/H.1,Bill Status H.1 (Act 44),H.1,Introduced,True,False
+VT,community land trust,H.2,https://legislature.vermont.gov/bill/status/2026/H.2,Bill Status H.2 (Act 4),H.2,Introduced,True,False
+VT,community land trust,H.3,https://legislature.vermont.gov/bill/status/2026/H.3,Bill Status H.3,H.3,Introduced,True,False
+VT,community land trust,H.4,https://legislature.vermont.gov/bill/status/2026/H.4,Bill Status H.4,H.4,Introduced,True,False
+VT,community land trust,H.5,https://legislature.vermont.gov/bill/status/2026/H.5,Bill Status H.5,H.5,In committee,True,False
+VT,community land trust,H.6,https://legislature.vermont.gov/bill/status/2026/H.6,Bill Status H.6,H.6,Introduced,True,False
+VT,community land trust,H.7,https://legislature.vermont.gov/bill/status/2026/H.7,Bill Status H.7,H.7,Introduced,True,False
+VT,community land trust,H.8,https://legislature.vermont.gov/bill/status/2026/H.8,Bill Status H.8,H.8,Introduced,True,False
+VT,community land trust,H.9,https://legislature.vermont.gov/bill/status/2026/H.9,Bill Status H.9,H.9,Introduced,True,False
+VT,community land trust,H.10,https://legislature.vermont.gov/bill/status/2026/H.10,Bill Status H.10,H.10,Introduced,True,False
+VT,community land trust,H.11,https://legislature.vermont.gov/bill/status/2026/H.11,Bill Status H.11,H.11,Introduced,True,False
+VT,community land trust,H.12,https://legislature.vermont.gov/bill/status/2026/H.12,Bill Status H.12,H.12,Introduced,True,False
+VT,community land trust,H.13,https://legislature.vermont.gov/bill/status/2026/H.13,Bill Status H.13 (Act 14),H.13,Introduced,True,False
+VT,community land trust,H.14,https://legislature.vermont.gov/bill/status/2026/H.14,Bill Status H.14,H.14,Introduced,True,False
+VT,community land trust,H.15,https://legislature.vermont.gov/bill/status/2026/H.15,Bill Status H.15,H.15,Introduced,True,False
+VT,community land trust,H.16,https://legislature.vermont.gov/bill/status/2026/H.16,Bill Status H.16,H.16,Introduced,True,False
+VT,community land trust,H.17,https://legislature.vermont.gov/bill/status/2026/H.17,Bill Status H.17,H.17,Introduced,True,False
+VT,community land trust,H.18,https://legislature.vermont.gov/bill/status/2026/H.18,Bill Status H.18,H.18,Introduced,True,False
+VT,community land trust,H.19,https://legislature.vermont.gov/bill/status/2026/H.19,Bill Status H.19,H.19,Introduced,True,False
+VT,community land trust,H.20,https://legislature.vermont.gov/bill/status/2026/H.20,Bill Status H.20,H.20,Introduced,True,False
+VT,community land trust,H.21,https://legislature.vermont.gov/bill/status/2026/H.21,Bill Status H.21 (Act 13),H.21,Introduced,True,False
+VT,community land trust,H.22,https://legislature.vermont.gov/bill/status/2026/H.22,Bill Status H.22,H.22,Introduced,True,False
+VT,community land trust,H.23,https://legislature.vermont.gov/bill/status/2026/H.23,Bill Status H.23,H.23,Introduced,True,False
+VT,community land trust,H.24,https://legislature.vermont.gov/bill/status/2026/H.24,Bill Status H.24,H.24,Introduced,True,False
+VT,community land trust,H.25,https://legislature.vermont.gov/bill/status/2026/H.25,Bill Status H.25,H.25,Introduced,True,False
+VT,community land trust,H.26,https://legislature.vermont.gov/bill/status/2026/H.26,Bill Status H.26,H.26,Introduced,True,False
+VT,community land trust,H.27,https://legislature.vermont.gov/bill/status/2026/H.27,Bill Status H.27 (Act 25),H.27,Introduced,True,False
+VT,community land trust,H.28,https://legislature.vermont.gov/bill/status/2026/H.28,Bill Status H.28,H.28,In committee,True,False
+VT,community land trust,H.29,https://legislature.vermont.gov/bill/status/2026/H.29,Bill Status H.29,H.29,Introduced,True,False
+VT,community land trust,H.30,https://legislature.vermont.gov/bill/status/2026/H.30,Bill Status H.30,H.30,Introduced,True,False
+VT,community land trust,H.31,https://legislature.vermont.gov/bill/status/2026/H.31,Bill Status H.31 (Act 3),H.31,Introduced,True,False
+VT,community land trust,H.32,https://legislature.vermont.gov/bill/status/2026/H.32,Bill Status H.32,H.32,Introduced,True,False
+VT,community land trust,H.33,https://legislature.vermont.gov/bill/status/2026/H.33,Bill Status H.33,H.33,Introduced,True,False
+VT,community land trust,H.34,https://legislature.vermont.gov/bill/status/2026/H.34,Bill Status H.34,H.34,In committee,True,False
+VT,community land trust,H.35,https://legislature.vermont.gov/bill/status/2026/H.35,Bill Status H.35 (Act 2),H.35,Introduced,True,False
+VT,community land trust,H.36,https://legislature.vermont.gov/bill/status/2026/H.36,Bill Status H.36,H.36,Introduced,True,False
+VT,community land trust,H.37,https://legislature.vermont.gov/bill/status/2026/H.37,Bill Status H.37,H.37,Introduced,True,False
+VT,community land trust,H.38,https://legislature.vermont.gov/bill/status/2026/H.38,Bill Status H.38,H.38,Introduced,True,False
+VT,community land trust,H.39,https://legislature.vermont.gov/bill/status/2026/H.39,Bill Status H.39,H.39,Introduced,True,False
+VT,community land trust,H.40,https://legislature.vermont.gov/bill/status/2026/H.40,Bill Status H.40,H.40,Introduced,True,False
+VT,community land trust,H.41,https://legislature.vermont.gov/bill/status/2026/H.41,Bill Status H.41 (Act 30),H.41,Introduced,True,False
+VT,community land trust,H.42,https://legislature.vermont.gov/bill/status/2026/H.42,Bill Status H.42,H.42,Introduced,True,False
+VT,community land trust,H.43,https://legislature.vermont.gov/bill/status/2026/H.43,Bill Status H.43,H.43,Introduced,True,False
+VT,community land trust,H.44,https://legislature.vermont.gov/bill/status/2026/H.44,Bill Status H.44 (Act 41),H.44,Introduced,True,False
+VT,community land trust,H.45,https://legislature.vermont.gov/bill/status/2026/H.45,Bill Status H.45,H.45,Introduced,True,False
+VT,community land trust,H.46,https://legislature.vermont.gov/bill/status/2026/H.46,Bill Status H.46,H.46,In committee,True,False
+VT,community land trust,H.47,https://legislature.vermont.gov/bill/status/2026/H.47,Bill Status H.47,H.47,Introduced,True,False
+VT,community land trust,H.48,https://legislature.vermont.gov/bill/status/2026/H.48,Bill Status H.48,H.48,Introduced,True,False
+VT,community land trust,H.49,https://legislature.vermont.gov/bill/status/2026/H.49,Bill Status H.49,H.49,Introduced,True,False
+VT,community land trust,H.50,https://legislature.vermont.gov/bill/status/2026/H.50,Bill Status H.50,H.50,Introduced,True,False
+VT,community land trust,H.51,https://legislature.vermont.gov/bill/status/2026/H.51,Bill Status H.51,H.51,Introduced,True,False
+VT,community land trust,H.52,https://legislature.vermont.gov/bill/status/2026/H.52,Bill Status H.52,H.52,Introduced,True,False
+VT,community land trust,H.53,https://legislature.vermont.gov/bill/status/2026/H.53,Bill Status H.53,H.53,Introduced,True,False
+VT,community land trust,H.54,https://legislature.vermont.gov/bill/status/2026/H.54,Bill Status H.54,H.54,Introduced,True,False
+VT,community land trust,H.55,https://legislature.vermont.gov/bill/status/2026/H.55,Bill Status H.55,H.55,Introduced,True,False
+VT,community land trust,H.56,https://legislature.vermont.gov/bill/status/2026/H.56,Bill Status H.56,H.56,Introduced,True,False
+VT,community land trust,H.57,https://legislature.vermont.gov/bill/status/2026/H.57,Bill Status H.57,H.57,In committee,True,False
+VT,community land trust,H.58,https://legislature.vermont.gov/bill/status/2026/H.58,Bill Status H.58,H.58,Introduced,True,False
+VT,community land trust,H.59,https://legislature.vermont.gov/bill/status/2026/H.59,Bill Status H.59,H.59,Introduced,True,False
+VT,community land trust,H.60,https://legislature.vermont.gov/bill/status/2026/H.60,Bill Status H.60,H.60,Introduced,True,False
+VT,community land trust,H.61,https://legislature.vermont.gov/bill/status/2026/H.61,Bill Status H.61,H.61,Introduced,True,False
+VT,community land trust,H.62,https://legislature.vermont.gov/bill/status/2026/H.62,Bill Status H.62,H.62,Introduced,True,False
+VT,community land trust,H.63,https://legislature.vermont.gov/bill/status/2026/H.63,Bill Status H.63,H.63,Introduced,True,False
+VT,community land trust,H.64,https://legislature.vermont.gov/bill/status/2026/H.64,Bill Status H.64,H.64,Introduced,True,False
+VT,community land trust,H.65,https://legislature.vermont.gov/bill/status/2026/H.65,Bill Status H.65,H.65,Introduced,True,False
+VT,community land trust,H.66,https://legislature.vermont.gov/bill/status/2026/H.66,Bill Status H.66,H.66,Introduced,True,False
+VT,community land trust,H.67,https://legislature.vermont.gov/bill/status/2026/H.67,Bill Status H.67,H.67,In committee,True,False
+VT,community land trust,H.68,https://legislature.vermont.gov/bill/status/2026/H.68,Bill Status H.68,H.68,Introduced,True,False
+VT,community land trust,H.69,https://legislature.vermont.gov/bill/status/2026/H.69,Bill Status H.69,H.69,Introduced,True,False
+VT,community land trust,H.70,https://legislature.vermont.gov/bill/status/2026/H.70,Bill Status H.70,H.70,Introduced,True,False
+VT,community land trust,H.71,https://legislature.vermont.gov/bill/status/2026/H.71,Bill Status H.71,H.71,Introduced,True,False
+VT,community land trust,H.72,https://legislature.vermont.gov/bill/status/2026/H.72,Bill Status H.72,H.72,Introduced,True,False
+VT,community land trust,H.73,https://legislature.vermont.gov/bill/status/2026/H.73,Bill Status H.73,H.73,Introduced,True,False
+VT,community land trust,H.74,https://legislature.vermont.gov/bill/status/2026/H.74,Bill Status H.74,H.74,Introduced,True,False
+VT,community land trust,H.75,https://legislature.vermont.gov/bill/status/2026/H.75,Bill Status H.75,H.75,Introduced,True,False
+VT,community land trust,H.76,https://legislature.vermont.gov/bill/status/2026/H.76,Bill Status H.76,H.76,Introduced,True,False
+VT,community land trust,H.77,https://legislature.vermont.gov/bill/status/2026/H.77,Bill Status H.77,H.77,Introduced,True,False
+VT,community land trust,H.78,https://legislature.vermont.gov/bill/status/2026/H.78,Bill Status H.78 (Act 1),H.78,Introduced,True,False
+VT,community land trust,H.79,https://legislature.vermont.gov/bill/status/2026/H.79,Bill Status H.79,H.79,Introduced,True,False
+VT,community land trust,H.80,https://legislature.vermont.gov/bill/status/2026/H.80,Bill Status H.80 (Act 6),H.80,Introduced,True,False
+VT,community land trust,H.81,https://legislature.vermont.gov/bill/status/2026/H.81,Bill Status H.81,H.81,Introduced,True,False
+VT,community land trust,H.82,https://legislature.vermont.gov/bill/status/2026/H.82,Bill Status H.82,H.82,Introduced,True,False
+VT,community land trust,H.83,https://legislature.vermont.gov/bill/status/2026/H.83,Bill Status H.83,H.83,Introduced,True,False
+VT,community land trust,H.84,https://legislature.vermont.gov/bill/status/2026/H.84,Bill Status H.84,H.84,In committee,True,False
+VT,community land trust,H.85,https://legislature.vermont.gov/bill/status/2026/H.85,Bill Status H.85,H.85,Introduced,True,False
+VT,community land trust,H.86,https://legislature.vermont.gov/bill/status/2026/H.86,Bill Status H.86,H.86,In committee,True,False
+VT,community land trust,H.87,https://legislature.vermont.gov/bill/status/2026/H.87,Bill Status H.87,H.87,Introduced,True,False
+VT,community land trust,H.88,https://legislature.vermont.gov/bill/status/2026/H.88,Bill Status H.88,H.88,Introduced,True,False
+VT,community land trust,H.89,https://legislature.vermont.gov/bill/status/2026/H.89,Bill Status H.89,H.89,Introduced,True,False
+VT,community land trust,H.90,https://legislature.vermont.gov/bill/status/2026/H.90,Bill Status H.90,H.90,Introduced,True,False
+VT,community land trust,H.91,https://legislature.vermont.gov/bill/status/2026/H.91,Bill Status H.91,H.91,Introduced,True,False
+VT,community land trust,H.92,https://legislature.vermont.gov/bill/status/2026/H.92,Bill Status H.92,H.92,Introduced,True,False
+VT,community land trust,H.93,https://legislature.vermont.gov/bill/status/2026/H.93,Bill Status H.93,H.93,Introduced,True,False
+VT,community land trust,H.94,https://legislature.vermont.gov/bill/status/2026/H.94,Bill Status H.94,H.94,Introduced,True,False
+VT,community land trust,H.95,https://legislature.vermont.gov/bill/status/2026/H.95,Bill Status H.95,H.95,Introduced,True,False
+VT,community land trust,H.96,https://legislature.vermont.gov/bill/status/2026/H.96,Bill Status H.96 (Act 15),H.96,Introduced,True,False
+VT,community land trust,H.97,https://legislature.vermont.gov/bill/status/2026/H.97,Bill Status H.97,H.97,Introduced,True,False
+VT,community land trust,H.98,https://legislature.vermont.gov/bill/status/2026/H.98,Bill Status H.98 (Act 31),H.98,Introduced,True,False
+VT,community land trust,H.99,https://legislature.vermont.gov/bill/status/2026/H.99,Bill Status H.99,H.99,Introduced,True,False
+VT,community land trust,H.100,https://legislature.vermont.gov/bill/status/2026/H.100,Bill Status H.100,H.100,Introduced,True,False
+VT,community land trust,S.1,https://legislature.vermont.gov/bill/status/2026/S.1,Bill Status S.1,S.1,In committee,True,False
+VT,community land trust,S.2,https://legislature.vermont.gov/bill/status/2026/S.2,Bill Status S.2,S.2,In committee,True,False
+VT,community land trust,S.3,https://legislature.vermont.gov/bill/status/2026/S.3,Bill Status S.3 (Act 7),S.3,Introduced,True,False
+VT,community land trust,S.4,https://legislature.vermont.gov/bill/status/2026/S.4,Bill Status S.4,S.4,In committee,True,False
+VT,community land trust,S.5,https://legislature.vermont.gov/bill/status/2026/S.5,Bill Status S.5,S.5,In committee,True,False
+VT,community land trust,S.6,https://legislature.vermont.gov/bill/status/2026/S.6,Bill Status S.6,S.6,In committee,True,False
+VT,community land trust,S.7,https://legislature.vermont.gov/bill/status/2026/S.7,Bill Status S.7,S.7,Introduced,True,False
+VT,community land trust,S.8,https://legislature.vermont.gov/bill/status/2026/S.8,Bill Status S.8,S.8,In committee,True,False
+VT,community land trust,S.9,https://legislature.vermont.gov/bill/status/2026/S.9,Bill Status S.9 (Act 12),S.9,Introduced,True,False
+VT,community land trust,S.10,https://legislature.vermont.gov/bill/status/2026/S.10,Bill Status S.10,S.10,In committee,True,False
+VT,community land trust,S.11,https://legislature.vermont.gov/bill/status/2026/S.11,Bill Status S.11,S.11,In committee,True,False
+VT,community land trust,S.12,https://legislature.vermont.gov/bill/status/2026/S.12,Bill Status S.12 (Act 60),S.12,Introduced,True,False
+VT,community land trust,S.13,https://legislature.vermont.gov/bill/status/2026/S.13,Bill Status S.13,S.13,In committee,True,False
+VT,community land trust,S.14,https://legislature.vermont.gov/bill/status/2026/S.14,Bill Status S.14,S.14,In committee,True,False
+VT,community land trust,S.15,https://legislature.vermont.gov/bill/status/2026/S.15,Bill Status S.15,S.15,In committee,True,False
+VT,community land trust,S.16,https://legislature.vermont.gov/bill/status/2026/S.16,Bill Status S.16,S.16,In committee,True,False
+VT,community land trust,S.17,https://legislature.vermont.gov/bill/status/2026/S.17,Bill Status S.17,S.17,In committee,True,False
+VT,community land trust,S.18,https://legislature.vermont.gov/bill/status/2026/S.18,Bill Status S.18 (Act 19),S.18,Introduced,True,False
+VT,community land trust,S.19,https://legislature.vermont.gov/bill/status/2026/S.19,Bill Status S.19,S.19,In committee,True,False
+VT,community land trust,S.20,https://legislature.vermont.gov/bill/status/2026/S.20,Bill Status S.20,S.20,In committee,True,False
+VT,community land trust,S.21,https://legislature.vermont.gov/bill/status/2026/S.21,Bill Status S.21,S.21,Introduced,True,False
+VT,community land trust,S.22,https://legislature.vermont.gov/bill/status/2026/S.22,Bill Status S.22,S.22,In committee,True,False
+VT,community land trust,S.23,https://legislature.vermont.gov/bill/status/2026/S.23,Bill Status S.23 (Act 75),S.23,Introduced,True,False
+VT,community land trust,S.24,https://legislature.vermont.gov/bill/status/2026/S.24,Bill Status S.24,S.24,In committee,True,False
+VT,community land trust,S.25,https://legislature.vermont.gov/bill/status/2026/S.25,Bill Status S.25,S.25,In committee,True,False
+VT,community land trust,S.26,https://legislature.vermont.gov/bill/status/2026/S.26,Bill Status S.26,S.26,Introduced,True,False
+VT,community land trust,S.27,https://legislature.vermont.gov/bill/status/2026/S.27,Bill Status S.27 (Act 21),S.27,Introduced,True,False
+VT,community land trust,S.28,https://legislature.vermont.gov/bill/status/2026/S.28,Bill Status S.28 (Act 20),S.28,Introduced,True,False
+VT,community land trust,S.29,https://legislature.vermont.gov/bill/status/2026/S.29,Bill Status S.29,S.29,In committee,True,False
+VT,community land trust,S.30,https://legislature.vermont.gov/bill/status/2026/S.30,Bill Status S.30 (Act 11),S.30,Introduced,True,False
+VT,community land trust,S.31,https://legislature.vermont.gov/bill/status/2026/S.31,Bill Status S.31,S.31,In committee,True,False
+VT,community land trust,S.32,https://legislature.vermont.gov/bill/status/2026/S.32,Bill Status S.32,S.32,In committee,True,False
+VT,community land trust,S.33,https://legislature.vermont.gov/bill/status/2026/S.33,Bill Status S.33,S.33,In committee,True,False
+VT,community land trust,S.34,https://legislature.vermont.gov/bill/status/2026/S.34,Bill Status S.34,S.34,In committee,True,False
+VT,community land trust,S.35,https://legislature.vermont.gov/bill/status/2026/S.35,Bill Status S.35,S.35,In committee,True,False
+VT,community land trust,S.36,https://legislature.vermont.gov/bill/status/2026/S.36,Bill Status S.36 (Act 22),S.36,Introduced,True,False
+VT,community land trust,S.37,https://legislature.vermont.gov/bill/status/2026/S.37,Bill Status S.37,S.37,In committee,True,False
+VT,community land trust,S.38,https://legislature.vermont.gov/bill/status/2026/S.38,Bill Status S.38,S.38,In committee,True,False
+VT,community land trust,S.39,https://legislature.vermont.gov/bill/status/2026/S.39,Bill Status S.39,S.39,Introduced,True,False
+VT,community land trust,S.40,https://legislature.vermont.gov/bill/status/2026/S.40,Bill Status S.40,S.40,In committee,True,False
+VT,community land trust,S.41,https://legislature.vermont.gov/bill/status/2026/S.41,Bill Status S.41,S.41,In committee,True,False
+VT,community land trust,S.42,https://legislature.vermont.gov/bill/status/2026/S.42,Bill Status S.42,S.42,In committee,True,False
+VT,community land trust,S.43,https://legislature.vermont.gov/bill/status/2026/S.43,Bill Status S.43,S.43,Introduced,True,False
+VT,community land trust,S.44,https://legislature.vermont.gov/bill/status/2026/S.44,Bill Status S.44 (Act 28),S.44,Introduced,True,False
+VT,community land trust,S.45,https://legislature.vermont.gov/bill/status/2026/S.45,Bill Status S.45 (Act 61),S.45,Introduced,True,False
+VT,community land trust,S.46,https://legislature.vermont.gov/bill/status/2026/S.46,Bill Status S.46,S.46,Introduced,True,False
+VT,community land trust,S.47,https://legislature.vermont.gov/bill/status/2026/S.47,Bill Status S.47,S.47,In committee,True,False
+VT,community land trust,S.48,https://legislature.vermont.gov/bill/status/2026/S.48,Bill Status S.48,S.48,In committee,True,False
+VT,community land trust,S.49,https://legislature.vermont.gov/bill/status/2026/S.49,Bill Status S.49,S.49,In committee,True,False
+VT,community land trust,S.50,https://legislature.vermont.gov/bill/status/2026/S.50,Bill Status S.50 (Act 38),S.50,Introduced,True,False
+VT,community land trust,S.51,https://legislature.vermont.gov/bill/status/2026/S.51,Bill Status S.51 (Act 71),S.51,Introduced,True,False
+VT,community land trust,S.52,https://legislature.vermont.gov/bill/status/2026/S.52,Bill Status S.52,S.52,In committee,True,False
+VT,community land trust,S.53,https://legislature.vermont.gov/bill/status/2026/S.53,Bill Status S.53 (Act 50),S.53,Introduced,True,False
+VT,community land trust,S.54,https://legislature.vermont.gov/bill/status/2026/S.54,Bill Status S.54,S.54,Introduced,True,False
+VT,community land trust,S.55,https://legislature.vermont.gov/bill/status/2026/S.55,Bill Status S.55,S.55,In committee,True,False
+VT,community land trust,S.56,https://legislature.vermont.gov/bill/status/2026/S.56,Bill Status S.56 (Act 29),S.56,Introduced,True,False
+VT,community land trust,S.57,https://legislature.vermont.gov/bill/status/2026/S.57,Bill Status S.57,S.57,In committee,True,False
+VT,community land trust,S.58,https://legislature.vermont.gov/bill/status/2026/S.58,Bill Status S.58,S.58,In committee,True,False
+VT,community land trust,S.59,https://legislature.vermont.gov/bill/status/2026/S.59,Bill Status S.59 (Act 51),S.59,Introduced,True,False
+VT,community land trust,S.60,https://legislature.vermont.gov/bill/status/2026/S.60,Bill Status S.60,S.60,Introduced,True,False
+VT,community land trust,S.61,https://legislature.vermont.gov/bill/status/2026/S.61,Bill Status S.61,S.61,In committee,True,False
+VT,community land trust,S.62,https://legislature.vermont.gov/bill/status/2026/S.62,Bill Status S.62,S.62,In committee,True,False
+VT,community land trust,S.63,https://legislature.vermont.gov/bill/status/2026/S.63,Bill Status S.63 (Act 62),S.63,Introduced,True,False
+VT,community land trust,S.64,https://legislature.vermont.gov/bill/status/2026/S.64,Bill Status S.64,S.64,Introduced,True,False
+VT,community land trust,S.65,https://legislature.vermont.gov/bill/status/2026/S.65,Bill Status S.65,S.65,Introduced,True,False
+VT,community land trust,S.66,https://legislature.vermont.gov/bill/status/2026/S.66,Bill Status S.66,S.66,Introduced,True,False
+VT,community land trust,S.67,https://legislature.vermont.gov/bill/status/2026/S.67,Bill Status S.67,S.67,In committee,True,False
+VT,community land trust,S.68,https://legislature.vermont.gov/bill/status/2026/S.68,Bill Status S.68,S.68,Introduced,True,False
+VT,community land trust,S.69,https://legislature.vermont.gov/bill/status/2026/S.69,Bill Status S.69 (Act 63),S.69,Introduced,True,False
+VT,community land trust,S.70,https://legislature.vermont.gov/bill/status/2026/S.70,Bill Status S.70,S.70,In committee,True,False
+VT,community land trust,S.71,https://legislature.vermont.gov/bill/status/2026/S.71,Bill Status S.71,S.71,Introduced,True,False
+VT,community land trust,S.72,https://legislature.vermont.gov/bill/status/2026/S.72,Bill Status S.72,S.72,In committee,True,False
+VT,community land trust,S.73,https://legislature.vermont.gov/bill/status/2026/S.73,Bill Status S.73,S.73,In committee,True,False
+VT,community land trust,S.74,https://legislature.vermont.gov/bill/status/2026/S.74,Bill Status S.74,S.74,In committee,True,False
+VT,community land trust,S.75,https://legislature.vermont.gov/bill/status/2026/S.75,Bill Status S.75,S.75,In committee,True,False
+VT,community land trust,S.76,https://legislature.vermont.gov/bill/status/2026/S.76,Bill Status S.76,S.76,In committee,True,False
+VT,community land trust,S.77,https://legislature.vermont.gov/bill/status/2026/S.77,Bill Status S.77,S.77,In committee,True,False
+VT,community land trust,S.78,https://legislature.vermont.gov/bill/status/2026/S.78,Bill Status S.78,S.78,In committee,True,False
+VT,community land trust,S.79,https://legislature.vermont.gov/bill/status/2026/S.79,Bill Status S.79,S.79,In committee,True,False
+VT,community land trust,S.80,https://legislature.vermont.gov/bill/status/2026/S.80,Bill Status S.80,S.80,In committee,True,False
+VT,community land trust,S.81,https://legislature.vermont.gov/bill/status/2026/S.81,Bill Status S.81,S.81,In committee,True,False
+VT,community land trust,S.82,https://legislature.vermont.gov/bill/status/2026/S.82,Bill Status S.82,S.82,In committee,True,False
+VT,community land trust,S.83,https://legislature.vermont.gov/bill/status/2026/S.83,Bill Status S.83,S.83,In committee,True,False
+VT,community land trust,S.84,https://legislature.vermont.gov/bill/status/2026/S.84,Bill Status S.84,S.84,In committee,True,False
+VT,community land trust,S.85,https://legislature.vermont.gov/bill/status/2026/S.85,Bill Status S.85,S.85,In committee,True,False
+VT,community land trust,S.86,https://legislature.vermont.gov/bill/status/2026/S.86,Bill Status S.86,S.86,In committee,True,False
+VT,community land trust,S.87,https://legislature.vermont.gov/bill/status/2026/S.87,Bill Status S.87 (Act 39),S.87,Introduced,True,False
+VT,community land trust,S.88,https://legislature.vermont.gov/bill/status/2026/S.88,Bill Status S.88,S.88,In committee,True,False
+VT,community land trust,S.89,https://legislature.vermont.gov/bill/status/2026/S.89,Bill Status S.89,S.89,In committee,True,False
+VT,community land trust,S.90,https://legislature.vermont.gov/bill/status/2026/S.90,Bill Status S.90,S.90,In committee,True,False
+VT,community land trust,S.91,https://legislature.vermont.gov/bill/status/2026/S.91,Bill Status S.91,S.91,In committee,True,False
+VT,community land trust,S.92,https://legislature.vermont.gov/bill/status/2026/S.92,Bill Status S.92,S.92,In committee,True,False
+VT,community land trust,S.93,https://legislature.vermont.gov/bill/status/2026/S.93,Bill Status S.93,S.93,In committee,True,False
+VT,community land trust,S.94,https://legislature.vermont.gov/bill/status/2026/S.94,Bill Status S.94,S.94,In committee,True,False
+VT,community land trust,S.95,https://legislature.vermont.gov/bill/status/2026/S.95,Bill Status S.95,S.95,In committee,True,False
+VT,community land trust,S.96,https://legislature.vermont.gov/bill/status/2026/S.96,Bill Status S.96,S.96,In committee,True,False
+VT,community land trust,S.97,https://legislature.vermont.gov/bill/status/2026/S.97,Bill Status S.97,S.97,In committee,True,False
+VT,community land trust,S.98,https://legislature.vermont.gov/bill/status/2026/S.98,Bill Status S.98,S.98,In committee,True,False
+VT,community land trust,S.99,https://legislature.vermont.gov/bill/status/2026/S.99,Bill Status S.99,S.99,In committee,True,False
+VT,community land trust,S.100,https://legislature.vermont.gov/bill/status/2026/S.100,Bill Status S.100,S.100,In committee,True,False
+VT,community land trust,H.1,https://legislature.vermont.gov/bill/status/2024/H.1,Bill Status H.1 (Act 2),H.1,Introduced,True,False
+VT,community land trust,H.2,https://legislature.vermont.gov/bill/status/2024/H.2,Bill Status H.2,H.2,Introduced,True,False
+VT,community land trust,H.3,https://legislature.vermont.gov/bill/status/2024/H.3,Bill Status H.3,H.3,Introduced,True,False
+VT,community land trust,H.4,https://legislature.vermont.gov/bill/status/2024/H.4,Bill Status H.4,H.4,Introduced,True,False
+VT,community land trust,H.5,https://legislature.vermont.gov/bill/status/2024/H.5,Bill Status H.5,H.5,Introduced,True,False
+VT,community land trust,H.6,https://legislature.vermont.gov/bill/status/2024/H.6,Bill Status H.6,H.6,Introduced,True,False
+VT,community land trust,H.7,https://legislature.vermont.gov/bill/status/2024/H.7,Bill Status H.7,H.7,Introduced,True,False
+VT,community land trust,H.8,https://legislature.vermont.gov/bill/status/2024/H.8,Bill Status H.8,H.8,Unknown,True,False
+VT,community land trust,H.9,https://legislature.vermont.gov/bill/status/2024/H.9,Bill Status H.9,H.9,Introduced,True,False
+VT,community land trust,H.10,https://legislature.vermont.gov/bill/status/2024/H.10,Bill Status H.10 (Act 176),H.10,Introduced,True,False
+VT,community land trust,H.11,https://legislature.vermont.gov/bill/status/2024/H.11,Bill Status H.11,H.11,Introduced,True,False
+VT,community land trust,H.12,https://legislature.vermont.gov/bill/status/2024/H.12,Bill Status H.12,H.12,Introduced,True,False
+VT,community land trust,H.13,https://legislature.vermont.gov/bill/status/2024/H.13,Bill Status H.13,H.13,Introduced,True,False
+VT,community land trust,H.14,https://legislature.vermont.gov/bill/status/2024/H.14,Bill Status H.14,H.14,Introduced,True,False
+VT,community land trust,H.15,https://legislature.vermont.gov/bill/status/2024/H.15,Bill Status H.15,H.15,Introduced,True,False
+VT,community land trust,H.16,https://legislature.vermont.gov/bill/status/2024/H.16,Bill Status H.16,H.16,Introduced,True,False
+VT,community land trust,H.17,https://legislature.vermont.gov/bill/status/2024/H.17,Bill Status H.17,H.17,Introduced,True,False
+VT,community land trust,H.18,https://legislature.vermont.gov/bill/status/2024/H.18,Bill Status H.18,H.18,Introduced,True,False
+VT,community land trust,H.19,https://legislature.vermont.gov/bill/status/2024/H.19,Bill Status H.19,H.19,Introduced,True,False
+VT,community land trust,H.20,https://legislature.vermont.gov/bill/status/2024/H.20,Bill Status H.20,H.20,Introduced,True,False
+VT,community land trust,H.21,https://legislature.vermont.gov/bill/status/2024/H.21,Bill Status H.21,H.21,In committee,True,False
+VT,community land trust,H.22,https://legislature.vermont.gov/bill/status/2024/H.22,Bill Status H.22,H.22,Introduced,True,False
+VT,community land trust,H.23,https://legislature.vermont.gov/bill/status/2024/H.23,Bill Status H.23,H.23,Introduced,True,False
+VT,community land trust,H.24,https://legislature.vermont.gov/bill/status/2024/H.24,Bill Status H.24,H.24,Introduced,True,False
+VT,community land trust,H.25,https://legislature.vermont.gov/bill/status/2024/H.25,Bill Status H.25,H.25,Introduced,True,False
+VT,community land trust,H.26,https://legislature.vermont.gov/bill/status/2024/H.26,Bill Status H.26,H.26,Introduced,True,False
+VT,community land trust,H.27,https://legislature.vermont.gov/bill/status/2024/H.27,Bill Status H.27 (Act 103),H.27,Introduced,True,False
+VT,community land trust,H.28,https://legislature.vermont.gov/bill/status/2024/H.28,Bill Status H.28 (Act 5),H.28,Introduced,True,False
+VT,community land trust,H.29,https://legislature.vermont.gov/bill/status/2024/H.29,Bill Status H.29,H.29,Introduced,True,False
+VT,community land trust,H.30,https://legislature.vermont.gov/bill/status/2024/H.30,Bill Status H.30,H.30,Introduced,True,False
+VT,community land trust,H.31,https://legislature.vermont.gov/bill/status/2024/H.31,Bill Status H.31 (Act 57),H.31,Introduced,True,False
+VT,community land trust,H.32,https://legislature.vermont.gov/bill/status/2024/H.32,Bill Status H.32,H.32,Introduced,True,False
+VT,community land trust,H.33,https://legislature.vermont.gov/bill/status/2024/H.33,Bill Status H.33,H.33,Introduced,True,False
+VT,community land trust,H.34,https://legislature.vermont.gov/bill/status/2024/H.34,Bill Status H.34,H.34,Introduced,True,False
+VT,community land trust,H.35,https://legislature.vermont.gov/bill/status/2024/H.35,Bill Status H.35 (Act 9),H.35,Introduced,True,False
+VT,community land trust,H.36,https://legislature.vermont.gov/bill/status/2024/H.36,Bill Status H.36,H.36,Introduced,True,False
+VT,community land trust,H.37,https://legislature.vermont.gov/bill/status/2024/H.37,Bill Status H.37,H.37,Introduced,True,False
+VT,community land trust,H.38,https://legislature.vermont.gov/bill/status/2024/H.38,Bill Status H.38,H.38,Introduced,True,False
+VT,community land trust,H.39,https://legislature.vermont.gov/bill/status/2024/H.39,Bill Status H.39,H.39,Introduced,True,False
+VT,community land trust,H.40,https://legislature.vermont.gov/bill/status/2024/H.40,Bill Status H.40 (Act 100),H.40,Introduced,True,False
+VT,community land trust,H.41,https://legislature.vermont.gov/bill/status/2024/H.41,Bill Status H.41 (Act 11),H.41,Introduced,True,False
+VT,community land trust,H.42,https://legislature.vermont.gov/bill/status/2024/H.42,Bill Status H.42 (Act 1),H.42,Introduced,True,False
+VT,community land trust,H.43,https://legislature.vermont.gov/bill/status/2024/H.43,Bill Status H.43,H.43,Introduced,True,False
+VT,community land trust,H.44,https://legislature.vermont.gov/bill/status/2024/H.44,Bill Status H.44,H.44,Introduced,True,False
+VT,community land trust,H.45,https://legislature.vermont.gov/bill/status/2024/H.45,Bill Status H.45 (Act 48),H.45,Introduced,True,False
+VT,community land trust,H.46,https://legislature.vermont.gov/bill/status/2024/H.46,Bill Status H.46,H.46,Introduced,True,False
+VT,community land trust,H.47,https://legislature.vermont.gov/bill/status/2024/H.47,Bill Status H.47,H.47,Introduced,True,False
+VT,community land trust,H.48,https://legislature.vermont.gov/bill/status/2024/H.48,Bill Status H.48,H.48,Introduced,True,False
+VT,community land trust,H.49,https://legislature.vermont.gov/bill/status/2024/H.49,Bill Status H.49,H.49,Introduced,True,False
+VT,community land trust,H.50,https://legislature.vermont.gov/bill/status/2024/H.50,Bill Status H.50,H.50,Introduced,True,False
+VT,community land trust,H.51,https://legislature.vermont.gov/bill/status/2024/H.51,Bill Status H.51,H.51,Introduced,True,False
+VT,community land trust,H.52,https://legislature.vermont.gov/bill/status/2024/H.52,Bill Status H.52,H.52,Introduced,True,False
+VT,community land trust,H.53,https://legislature.vermont.gov/bill/status/2024/H.53,Bill Status H.53 (Act 19),H.53,Introduced,True,False
+VT,community land trust,H.54,https://legislature.vermont.gov/bill/status/2024/H.54,Bill Status H.54,H.54,Introduced,True,False
+VT,community land trust,H.55,https://legislature.vermont.gov/bill/status/2024/H.55,Bill Status H.55 (Act 184),H.55,Introduced,True,False
+VT,community land trust,H.56,https://legislature.vermont.gov/bill/status/2024/H.56,Bill Status H.56,H.56,Introduced,True,False
+VT,community land trust,H.57,https://legislature.vermont.gov/bill/status/2024/H.57,Bill Status H.57,H.57,Introduced,True,False
+VT,community land trust,H.58,https://legislature.vermont.gov/bill/status/2024/H.58,Bill Status H.58,H.58,Introduced,True,False
+VT,community land trust,H.59,https://legislature.vermont.gov/bill/status/2024/H.59,Bill Status H.59,H.59,Introduced,True,False
+VT,community land trust,H.60,https://legislature.vermont.gov/bill/status/2024/H.60,Bill Status H.60,H.60,Introduced,True,False
+VT,community land trust,H.61,https://legislature.vermont.gov/bill/status/2024/H.61,Bill Status H.61,H.61,Introduced,True,False
+VT,community land trust,H.62,https://legislature.vermont.gov/bill/status/2024/H.62,Bill Status H.62 (Act 34),H.62,Introduced,True,False
+VT,community land trust,H.63,https://legislature.vermont.gov/bill/status/2024/H.63,Bill Status H.63,H.63,Introduced,True,False
+VT,community land trust,H.64,https://legislature.vermont.gov/bill/status/2024/H.64,Bill Status H.64,H.64,Introduced,True,False
+VT,community land trust,H.65,https://legislature.vermont.gov/bill/status/2024/H.65,Bill Status H.65,H.65,Introduced,True,False
+VT,community land trust,H.66,https://legislature.vermont.gov/bill/status/2024/H.66,Bill Status H.66,H.66,In committee,True,False
+VT,community land trust,H.67,https://legislature.vermont.gov/bill/status/2024/H.67,Bill Status H.67 (Act 58),H.67,Introduced,True,False
+VT,community land trust,H.68,https://legislature.vermont.gov/bill/status/2024/H.68,Bill Status H.68,H.68,Introduced,True,True
+VT,community land trust,H.69,https://legislature.vermont.gov/bill/status/2024/H.69,Bill Status H.69,H.69,Introduced,True,False
+VT,community land trust,H.70,https://legislature.vermont.gov/bill/status/2024/H.70,Bill Status H.70,H.70,Introduced,True,False
+VT,community land trust,H.71,https://legislature.vermont.gov/bill/status/2024/H.71,Bill Status H.71,H.71,Introduced,True,False
+VT,community land trust,H.72,https://legislature.vermont.gov/bill/status/2024/H.72,Bill Status H.72 (Act 178),H.72,Amended,True,False
+VT,community land trust,H.73,https://legislature.vermont.gov/bill/status/2024/H.73,Bill Status H.73,H.73,Introduced,True,False
+VT,community land trust,H.74,https://legislature.vermont.gov/bill/status/2024/H.74,Bill Status H.74,H.74,Introduced,True,False
+VT,community land trust,H.75,https://legislature.vermont.gov/bill/status/2024/H.75,Bill Status H.75,H.75,Introduced,True,False
+VT,community land trust,H.76,https://legislature.vermont.gov/bill/status/2024/H.76,Bill Status H.76 (Act 12),H.76,Amended,True,False
+VT,community land trust,H.77,https://legislature.vermont.gov/bill/status/2024/H.77,Bill Status H.77 (Act 35),H.77,Introduced,True,False
+VT,community land trust,H.78,https://legislature.vermont.gov/bill/status/2024/H.78,Bill Status H.78,H.78,Introduced,True,False
+VT,community land trust,H.79,https://legislature.vermont.gov/bill/status/2024/H.79,Bill Status H.79,H.79,Introduced,True,False
+VT,community land trust,H.80,https://legislature.vermont.gov/bill/status/2024/H.80,Bill Status H.80,H.80,Introduced,True,False
+VT,community land trust,H.81,https://legislature.vermont.gov/bill/status/2024/H.81,Bill Status H.81,H.81,Introduced,True,False
+VT,community land trust,H.82,https://legislature.vermont.gov/bill/status/2024/H.82,Bill Status H.82,H.82,Introduced,True,False
+VT,community land trust,H.83,https://legislature.vermont.gov/bill/status/2024/H.83,Bill Status H.83,H.83,Introduced,True,False
+VT,community land trust,H.84,https://legislature.vermont.gov/bill/status/2024/H.84,Bill Status H.84,H.84,Introduced,True,False
+VT,community land trust,H.85,https://legislature.vermont.gov/bill/status/2024/H.85,Bill Status H.85,H.85,Introduced,True,False
+VT,community land trust,H.86,https://legislature.vermont.gov/bill/status/2024/H.86,Bill Status H.86 (Act 36),H.86,Introduced,True,False
+VT,community land trust,H.87,https://legislature.vermont.gov/bill/status/2024/H.87,Bill Status H.87,H.87,Introduced,True,False
+VT,community land trust,H.88,https://legislature.vermont.gov/bill/status/2024/H.88,Bill Status H.88,H.88,Introduced,True,False
+VT,community land trust,H.89,https://legislature.vermont.gov/bill/status/2024/H.89,Bill Status H.89 (Act 14),H.89,Introduced,True,False
+VT,community land trust,H.90,https://legislature.vermont.gov/bill/status/2024/H.90,Bill Status H.90,H.90,Introduced,True,False
+VT,community land trust,H.91,https://legislature.vermont.gov/bill/status/2024/H.91,Bill Status H.91,H.91,Introduced,True,False
+VT,community land trust,H.92,https://legislature.vermont.gov/bill/status/2024/H.92,Bill Status H.92,H.92,Introduced,True,False
+VT,community land trust,H.93,https://legislature.vermont.gov/bill/status/2024/H.93,Bill Status H.93,H.93,Introduced,True,False
+VT,community land trust,H.94,https://legislature.vermont.gov/bill/status/2024/H.94,Bill Status H.94 (Act 49),H.94,Introduced,True,False
+VT,community land trust,H.95,https://legislature.vermont.gov/bill/status/2024/H.95,Bill Status H.95,H.95,Introduced,True,False
+VT,community land trust,H.96,https://legislature.vermont.gov/bill/status/2024/H.96,Bill Status H.96,H.96,Introduced,True,False
+VT,community land trust,H.97,https://legislature.vermont.gov/bill/status/2024/H.97,Bill Status H.97,H.97,Introduced,True,False
+VT,community land trust,H.98,https://legislature.vermont.gov/bill/status/2024/H.98,Bill Status H.98,H.98,Introduced,True,False
+VT,community land trust,H.99,https://legislature.vermont.gov/bill/status/2024/H.99,Bill Status H.99,H.99,Introduced,True,False
+VT,community land trust,H.100,https://legislature.vermont.gov/bill/status/2024/H.100,Bill Status H.100,H.100,Introduced,True,False
+VT,community land trust,S.1,https://legislature.vermont.gov/bill/status/2024/S.1,Bill Status S.1,S.1,In committee,True,False
+VT,community land trust,S.2,https://legislature.vermont.gov/bill/status/2024/S.2,Bill Status S.2,S.2,In committee,True,False
+VT,community land trust,S.3,https://legislature.vermont.gov/bill/status/2024/S.3,Bill Status S.3 (Act 13),S.3,Introduced,True,False
+VT,community land trust,S.4,https://legislature.vermont.gov/bill/status/2024/S.4,Bill Status S.4 (Act 23),S.4,Introduced,True,False
+VT,community land trust,S.5,https://legislature.vermont.gov/bill/status/2024/S.5,Bill Status S.5 (Act 18),S.5,Amended,True,False
+VT,community land trust,S.6,https://legislature.vermont.gov/bill/status/2024/S.6,Bill Status S.6,S.6,Introduced,True,False
+VT,community land trust,S.7,https://legislature.vermont.gov/bill/status/2024/S.7,Bill Status S.7,S.7,In committee,True,False
+VT,community land trust,S.8,https://legislature.vermont.gov/bill/status/2024/S.8,Bill Status S.8,S.8,In committee,True,False
+VT,community land trust,S.9,https://legislature.vermont.gov/bill/status/2024/S.9,Bill Status S.9,S.9,Introduced,True,False
+VT,community land trust,S.10,https://legislature.vermont.gov/bill/status/2024/S.10,Bill Status S.10,S.10,In committee,True,False
+VT,community land trust,S.11,https://legislature.vermont.gov/bill/status/2024/S.11,Bill Status S.11,S.11,In committee,True,False
+VT,community land trust,S.12,https://legislature.vermont.gov/bill/status/2024/S.12,Bill Status S.12,S.12,In committee,True,False
+VT,community land trust,S.13,https://legislature.vermont.gov/bill/status/2024/S.13,Bill Status S.13,S.13,In committee,True,False
+VT,community land trust,S.14,https://legislature.vermont.gov/bill/status/2024/S.14,Bill Status S.14 (Act 40),S.14,Amended,True,False
+VT,community land trust,S.15,https://legislature.vermont.gov/bill/status/2024/S.15,Bill Status S.15,S.15,In committee,True,False
+VT,community land trust,S.16,https://legislature.vermont.gov/bill/status/2024/S.16,Bill Status S.16,S.16,In committee,True,False
+VT,community land trust,S.17,https://legislature.vermont.gov/bill/status/2024/S.17,Bill Status S.17 (Act 30),S.17,Introduced,True,False
+VT,community land trust,S.18,https://legislature.vermont.gov/bill/status/2024/S.18,Bill Status S.18,S.18,Introduced,True,False
+VT,community land trust,S.19,https://legislature.vermont.gov/bill/status/2024/S.19,Bill Status S.19,S.19,In committee,True,False
+VT,community land trust,S.20,https://legislature.vermont.gov/bill/status/2024/S.20,Bill Status S.20,S.20,In committee,True,False
+VT,community land trust,S.21,https://legislature.vermont.gov/bill/status/2024/S.21,Bill Status S.21,S.21,In committee,True,False
+VT,community land trust,S.22,https://legislature.vermont.gov/bill/status/2024/S.22,Bill Status S.22,S.22,In committee,True,False
+VT,community land trust,S.23,https://legislature.vermont.gov/bill/status/2024/S.23,Bill Status S.23,S.23,In committee,True,False
+VT,community land trust,S.24,https://legislature.vermont.gov/bill/status/2024/S.24,Bill Status S.24,S.24,In committee,True,False
+VT,community land trust,S.25,https://legislature.vermont.gov/bill/status/2024/S.25,Bill Status S.25 (Act 131),S.25,Introduced,True,False
+VT,community land trust,S.26,https://legislature.vermont.gov/bill/status/2024/S.26,Bill Status S.26,S.26,In committee,True,False
+VT,community land trust,S.27,https://legislature.vermont.gov/bill/status/2024/S.27,Bill Status S.27,S.27,Introduced,True,False
+VT,community land trust,S.28,https://legislature.vermont.gov/bill/status/2024/S.28,Bill Status S.28,S.28,In committee,True,False
+VT,community land trust,S.29,https://legislature.vermont.gov/bill/status/2024/S.29,Bill Status S.29,S.29,In committee,True,False
+VT,community land trust,S.30,https://legislature.vermont.gov/bill/status/2024/S.30,Bill Status S.30 (Act 132),S.30,Introduced,True,False
+VT,community land trust,S.31,https://legislature.vermont.gov/bill/status/2024/S.31,Bill Status S.31,S.31,In committee,True,False
+VT,community land trust,S.32,https://legislature.vermont.gov/bill/status/2024/S.32,Bill Status S.32,S.32,Introduced,True,False
+VT,community land trust,S.33,https://legislature.vermont.gov/bill/status/2024/S.33,Bill Status S.33 (Act 46),S.33,Introduced,True,False
+VT,community land trust,S.34,https://legislature.vermont.gov/bill/status/2024/S.34,Bill Status S.34,S.34,In committee,True,False
+VT,community land trust,S.35,https://legislature.vermont.gov/bill/status/2024/S.35,Bill Status S.35,S.35,Introduced,True,False
+VT,community land trust,S.36,https://legislature.vermont.gov/bill/status/2024/S.36,Bill Status S.36 (Act 24),S.36,Introduced,True,False
+VT,community land trust,S.37,https://legislature.vermont.gov/bill/status/2024/S.37,Bill Status S.37 (Act 15),S.37,In committee,True,False
+VT,community land trust,S.38,https://legislature.vermont.gov/bill/status/2024/S.38,Bill Status S.38,S.38,In committee,True,False
+VT,community land trust,S.39,https://legislature.vermont.gov/bill/status/2024/S.39,Bill Status S.39,S.39,Introduced,True,False
+VT,community land trust,S.40,https://legislature.vermont.gov/bill/status/2024/S.40,Bill Status S.40,S.40,In committee,True,False
+VT,community land trust,S.41,https://legislature.vermont.gov/bill/status/2024/S.41,Bill Status S.41,S.41,In committee,True,False
+VT,community land trust,S.42,https://legislature.vermont.gov/bill/status/2024/S.42,Bill Status S.42,S.42,Introduced,True,False
+VT,community land trust,S.43,https://legislature.vermont.gov/bill/status/2024/S.43,Bill Status S.43,S.43,In committee,True,False
+VT,community land trust,S.44,https://legislature.vermont.gov/bill/status/2024/S.44,Bill Status S.44,S.44,In committee,True,False
+VT,community land trust,S.45,https://legislature.vermont.gov/bill/status/2024/S.45,Bill Status S.45,S.45,Introduced,True,False
+VT,community land trust,S.46,https://legislature.vermont.gov/bill/status/2024/S.46,Bill Status S.46,S.46,Introduced,True,False
+VT,community land trust,S.47,https://legislature.vermont.gov/bill/status/2024/S.47,Bill Status S.47 (Act 25),S.47,Introduced,True,False
+VT,community land trust,S.48,https://legislature.vermont.gov/bill/status/2024/S.48,Bill Status S.48 (Act 31),S.48,Introduced,True,False
+VT,community land trust,S.49,https://legislature.vermont.gov/bill/status/2024/S.49,Bill Status S.49,S.49,In committee,True,False
+VT,community land trust,S.50,https://legislature.vermont.gov/bill/status/2024/S.50,Bill Status S.50,S.50,Introduced,True,False
+VT,community land trust,S.51,https://legislature.vermont.gov/bill/status/2024/S.51,Bill Status S.51,S.51,In committee,True,False
+VT,community land trust,S.52,https://legislature.vermont.gov/bill/status/2024/S.52,Bill Status S.52,S.52,In committee,True,False
+VT,community land trust,S.53,https://legislature.vermont.gov/bill/status/2024/S.53,Bill Status S.53,S.53,In committee,True,False
+VT,community land trust,S.54,https://legislature.vermont.gov/bill/status/2024/S.54,Bill Status S.54 (Act 7),S.54,Introduced,True,False
+VT,community land trust,S.55,https://legislature.vermont.gov/bill/status/2024/S.55,Bill Status S.55 (Act 133),S.55,Introduced,True,False
+VT,community land trust,S.56,https://legislature.vermont.gov/bill/status/2024/S.56,Bill Status S.56,S.56,Amended,True,False
+VT,community land trust,S.57,https://legislature.vermont.gov/bill/status/2024/S.57,Bill Status S.57,S.57,In committee,True,False
+VT,community land trust,S.58,https://legislature.vermont.gov/bill/status/2024/S.58,Bill Status S.58 (Act 125),S.58,Introduced,True,False
+VT,community land trust,S.59,https://legislature.vermont.gov/bill/status/2024/S.59,Bill Status S.59,S.59,In committee,True,False
+VT,community land trust,S.60,https://legislature.vermont.gov/bill/status/2024/S.60,Bill Status S.60,S.60,Introduced,True,False
+VT,community land trust,S.61,https://legislature.vermont.gov/bill/status/2024/S.61,Bill Status S.61,S.61,In committee,True,False
+VT,community land trust,S.62,https://legislature.vermont.gov/bill/status/2024/S.62,Bill Status S.62,S.62,In committee,True,False
+VT,community land trust,S.63,https://legislature.vermont.gov/bill/status/2024/S.63,Bill Status S.63,S.63,In committee,True,False
+VT,community land trust,S.64,https://legislature.vermont.gov/bill/status/2024/S.64,Bill Status S.64,S.64,In committee,True,False
+VT,community land trust,S.65,https://legislature.vermont.gov/bill/status/2024/S.65,Bill Status S.65,S.65,Introduced,True,False
+VT,community land trust,S.66,https://legislature.vermont.gov/bill/status/2024/S.66,Bill Status S.66,S.66,In committee,True,False
+VT,community land trust,S.67,https://legislature.vermont.gov/bill/status/2024/S.67,Bill Status S.67,S.67,In committee,True,False
+VT,community land trust,S.68,https://legislature.vermont.gov/bill/status/2024/S.68,Bill Status S.68,S.68,In committee,True,False
+VT,community land trust,S.69,https://legislature.vermont.gov/bill/status/2024/S.69,Bill Status S.69,S.69,In committee,True,False
+VT,community land trust,S.70,https://legislature.vermont.gov/bill/status/2024/S.70,Bill Status S.70,S.70,In committee,True,False
+VT,community land trust,S.71,https://legislature.vermont.gov/bill/status/2024/S.71,Bill Status S.71,S.71,In committee,True,False
+VT,community land trust,S.72,https://legislature.vermont.gov/bill/status/2024/S.72,Bill Status S.72,S.72,In committee,True,False
+VT,community land trust,S.73,https://legislature.vermont.gov/bill/status/2024/S.73,Bill Status S.73 (Act 26),S.73,Introduced,True,False
+VT,community land trust,S.74,https://legislature.vermont.gov/bill/status/2024/S.74,Bill Status S.74,S.74,In committee,True,False
+VT,community land trust,S.75,https://legislature.vermont.gov/bill/status/2024/S.75,Bill Status S.75,S.75,In committee,True,False
+VT,community land trust,S.76,https://legislature.vermont.gov/bill/status/2024/S.76,Bill Status S.76,S.76,In committee,True,False
+VT,community land trust,S.77,https://legislature.vermont.gov/bill/status/2024/S.77,Bill Status S.77,S.77,In committee,True,False
+VT,community land trust,S.78,https://legislature.vermont.gov/bill/status/2024/S.78,Bill Status S.78,S.78,In committee,True,False
+VT,community land trust,S.79,https://legislature.vermont.gov/bill/status/2024/S.79,Bill Status S.79,S.79,Introduced,True,False
+VT,community land trust,S.80,https://legislature.vermont.gov/bill/status/2024/S.80,Bill Status S.80 (Act 79),S.80,Introduced,True,False
+VT,community land trust,S.81,https://legislature.vermont.gov/bill/status/2024/S.81,Bill Status S.81,S.81,In committee,True,False
+VT,community land trust,S.82,https://legislature.vermont.gov/bill/status/2024/S.82,Bill Status S.82,S.82,In committee,True,False
+VT,community land trust,S.83,https://legislature.vermont.gov/bill/status/2024/S.83,Bill Status S.83,S.83,In committee,True,False
+VT,community land trust,S.84,https://legislature.vermont.gov/bill/status/2024/S.84,Bill Status S.84,S.84,In committee,True,False
+VT,community land trust,S.85,https://legislature.vermont.gov/bill/status/2024/S.85,Bill Status S.85,S.85,Introduced,True,False
+VT,community land trust,S.86,https://legislature.vermont.gov/bill/status/2024/S.86,Bill Status S.86,S.86,In committee,True,False
+VT,community land trust,S.87,https://legislature.vermont.gov/bill/status/2024/S.87,Bill Status S.87,S.87,In committee,True,False
+VT,community land trust,S.88,https://legislature.vermont.gov/bill/status/2024/S.88,Bill Status S.88,S.88,In committee,True,False
+VT,community land trust,S.89,https://legislature.vermont.gov/bill/status/2024/S.89,Bill Status S.89 (Act 27),S.89,Introduced,True,False
+VT,community land trust,S.90,https://legislature.vermont.gov/bill/status/2024/S.90,Bill Status S.90,S.90,In committee,True,False
+VT,community land trust,S.91,https://legislature.vermont.gov/bill/status/2024/S.91,Bill Status S.91 (Act 28),S.91,Introduced,True,False
+VT,community land trust,S.92,https://legislature.vermont.gov/bill/status/2024/S.92,Bill Status S.92,S.92,In committee,True,False
+VT,community land trust,S.93,https://legislature.vermont.gov/bill/status/2024/S.93,Bill Status S.93,S.93,Introduced,True,False
+VT,community land trust,S.94,https://legislature.vermont.gov/bill/status/2024/S.94,Bill Status S.94,S.94,Amended,True,False
+VT,community land trust,S.95,https://legislature.vermont.gov/bill/status/2024/S.95,Bill Status S.95 (Act 32),S.95,Introduced,True,False
+VT,community land trust,S.96,https://legislature.vermont.gov/bill/status/2024/S.96,Bill Status S.96,S.96,Amended,True,False
+VT,community land trust,S.97,https://legislature.vermont.gov/bill/status/2024/S.97,Bill Status S.97,S.97,In committee,True,False
+VT,community land trust,S.98,https://legislature.vermont.gov/bill/status/2024/S.98,Bill Status S.98 (Act 134),S.98,Introduced,True,False
+VT,community land trust,S.99,https://legislature.vermont.gov/bill/status/2024/S.99,Bill Status S.99 (Act 41),S.99,Introduced,True,False
+VT,community land trust,S.100,https://legislature.vermont.gov/bill/status/2024/S.100,Bill Status S.100 (Act 47),S.100,Introduced,True,False
+VT,community land trust,10 V.S.A. § 321,https://legislature.vermont.gov/statutes/section/10/015/00321,10 V.S.A. § 321 - The Vermont Statutes Online,10 V.S.A. § 321,Current law,True,True
+VT,community land trust,32 V.S.A. § 3847,https://legislature.vermont.gov/statutes/section/32/125/03847,32 V.S.A. § 3847 - The Vermont Statutes Online,32 V.S.A. § 3847,Current law,True,True
+VT,community land trust,24 V.S.A. § 4303,https://legislature.vermont.gov/statutes/section/24/117/04303,24 V.S.A. § 4303 - The Vermont Statutes Online,24 V.S.A. § 4303,Current law,True,True

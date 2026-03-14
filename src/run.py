@@ -1,14 +1,25 @@
 import pandas as pd
+from datetime import datetime
 from discovery import discover_candidates
 from extraction import extract_page_fields, looks_like_real_bill, matches_keyword
 from normalize import normalize_record
 from storage import save_csv, save_sqlite
-from datetime import datetime
+
+
+DEBUG_STATES = []
+DEBUG_KEYWORDS = []
+SAVE_SQLITE = True
 
 
 def run_pipeline():
     states_df = pd.read_csv("config/states.csv")
     keywords_df = pd.read_csv("config/keywords.csv")
+
+    if DEBUG_STATES:
+        states_df = states_df[states_df["state"].isin(DEBUG_STATES)]
+
+    if DEBUG_KEYWORDS:
+        keywords_df = keywords_df[keywords_df["keyword"].isin(DEBUG_KEYWORDS)]
 
     all_normalized = []
     crawl_log = []
@@ -53,7 +64,7 @@ def run_pipeline():
                         "matches_keyword": keyword_hit,
                     })
 
-                    if i % 25 == 0:
+                    if i % 10 == 0:
                         print(f"Checked {i} candidates for {state} | {keyword}")
 
                     if not is_real_bill:
@@ -65,7 +76,7 @@ def run_pipeline():
                     normalized = normalize_record(candidate, extracted)
                     all_normalized.append(normalized)
 
-                    print(f"MATCH: {normalized['identifier']} -> {normalized['source_url']}")
+                    print(f"MATCH: {normalized['state']} | {normalized['identifier']} -> {normalized['source_url']}")
 
                 except Exception as e:
                     crawl_log.append({
@@ -82,25 +93,19 @@ def run_pipeline():
                     })
                     print(f"Extraction failed for {candidate['candidate_url']}: {e}")
 
-    findings_df = pd.DataFrame(all_normalized)
-
-    if not findings_df.empty:
-        print("\nMatches by state:")
-        print(findings_df["state"].value_counts())
-
-    if all_normalized:
-        findings_df = pd.DataFrame(all_normalized).drop_duplicates(
-            subset=["state", "source_url", "identifier", "airtable_category"]
-        )
-        print("\nMatches by state:")
-        print(findings_df["state"].value_counts())
-
-    # Always save crawl log
-    crawl_log_df = pd.DataFrame(crawl_log)
+            subset = pd.DataFrame(crawl_log)
+            subset = subset[(subset["state"] == state) & (subset["keyword"] == keyword)]
+            if not subset.empty:
+                print(f"{state} | {keyword} total checked: {len(subset)}")
+                print(f"{state} | {keyword} real bills/statutes: {int(subset['is_real_bill'].fillna(False).sum())}")
+                print(f"{state} | {keyword} keyword hits: {int(subset['matches_keyword'].fillna(False).sum())}")
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    # Save matched findings
+    crawl_log_df = pd.DataFrame(crawl_log)
+    save_csv(crawl_log_df.to_dict(orient="records"), "data/exports/crawl_log.csv")
+    save_csv(crawl_log_df.to_dict(orient="records"), f"data/exports/crawl_log_{timestamp}.csv")
+
     if all_normalized:
         findings_df = pd.DataFrame(all_normalized).drop_duplicates(
             subset=["state", "source_url", "identifier", "airtable_category"]
@@ -109,10 +114,23 @@ def run_pipeline():
 
         save_csv(findings_records, "data/exports/findings_export.csv")
         save_csv(findings_records, f"data/exports/findings_export_{timestamp}.csv")
-        save_sqlite(findings_records)
+
+        if SAVE_SQLITE:
+            save_sqlite(findings_records)
+
         print(f"\nSaved {len(findings_records)} matching records.")
+        print("\nMatches by state:")
+        print(findings_df["state"].value_counts())
     else:
         print("\nNo matching records found.")
+
+    if not crawl_log_df.empty:
+        real_bill_count = int(crawl_log_df["is_real_bill"].fillna(False).sum())
+        keyword_match_count = int(crawl_log_df["matches_keyword"].fillna(False).sum())
+        print(f"Total candidates checked: {len(crawl_log_df)}")
+        print(f"Real bills/statutes found: {real_bill_count}")
+        print(f"Keyword matches found: {keyword_match_count}")
+        print("Saved crawl log to data/exports/crawl_log.csv")
 
 
 if __name__ == "__main__":

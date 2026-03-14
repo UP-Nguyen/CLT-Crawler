@@ -71,3 +71,15 @@ NY Open Legislation API
 
 TODO: add this to GH actions secrets
 https://legislation.nysenate.gov/public
+
+At the top of run.py
+
+To compare states:
+DEBUG_STATES = ["CA", "VT"]
+SAVE_SQLITE = False            # keep False while prototyping
+
+
+For a full run:
+DEBUG_STATES = []
+DEBUG_KEYWORDS = []
+SAVE_SQLITE = True

@@ -23,9 +23,16 @@ def extract_identifier_from_url(url):
     if ny_match:
         return ny_match.group(1).upper()
 
-    vt_match = re.search(r"/bill/status/\d{4}/([HS]\.\d+)", url, re.IGNORECASE)
-    if vt_match:
-        return vt_match.group(1).upper()
+    vt_bill_match = re.search(r"/bill/status/\d{4}/([HS]\.\d+)", url, re.IGNORECASE)
+    if vt_bill_match:
+        return vt_bill_match.group(1).upper()
+
+    # Vermont statute URLs like /statutes/section/24/117/04303
+    vt_statute_match = re.search(r"/statutes/section/(\d+)/(\d+)/(\d+)", url, re.IGNORECASE)
+    if vt_statute_match:
+        title_num = vt_statute_match.group(1)
+        section_num = str(int(vt_statute_match.group(3)))  # 04303 -> 4303
+        return f"{title_num} V.S.A. § {section_num}"
 
     return None
 
@@ -51,24 +58,34 @@ def extract_identifier_from_title(title):
 
 def extract_identifier_from_text(text):
     patterns = [
-        r"\b(AB|SB|ACA|SCA|AJR|SJR)[-\s]*(\d+)\b",
-        r"\b([SA])(\d+)\b",
-        r"\b([HS])\.(\d+)\b",
-        r"\b(HB|SB)[-\s]*(\d+)\b",
-        r"\bChapter\s+(\d+)\b",
-        r"\bc\.\s*(\d+)\b",
+        ("ca_bill", r"\b(AB|SB|ACA|SCA|AJR|SJR)[-\s]*(\d+)\b"),
+        ("ny_bill", r"\b([SA])(\d+)\b"),
+        ("vt_bill", r"\b([HS])\.(\d+)\b"),
+        ("generic_bill", r"\b(HB|SB)[-\s]*(\d+)\b"),
+        ("chapter", r"\bChapter\s+(\d+)\b"),
+        ("citation", r"\bc\.\s*(\d+)\b"),
     ]
 
-    for pattern in patterns:
+    for pattern_type, pattern in patterns:
         match = re.search(pattern, text, re.IGNORECASE)
-        if match:
+        if not match:
+            continue
+
+        if pattern_type == "vt_bill":
+            return f"{match.group(1).upper()}.{match.group(2)}"
+
+        if pattern_type in {"ca_bill", "ny_bill", "generic_bill"}:
             g1 = match.group(1).upper()
             g2 = match.group(2)
-            if g1 in {"H", "S"} and "." in pattern:
-                return f"{g1}.{g2}"
-            if g1 in {"A", "S"} and pattern == r"\b([SA])(\d+)\b":
+            if pattern_type == "ny_bill":
                 return f"{g1}{g2}"
             return f"{g1} {g2}"
+
+        if pattern_type == "chapter":
+            return f"Chapter {match.group(1)}"
+
+        if pattern_type == "citation":
+            return f"c. {match.group(1)}"
 
     return None
 
@@ -217,12 +234,32 @@ def extract_page_fields(url, source_type="legislature"):
 
     text = clean_text(soup.get_text(" ", strip=True))
 
-    title_el = soup.select_one("h1, title, .bill-title, .page-title")
+    # Default title extraction
+    title_el = soup.select_one("h1, h2, title, .bill-title, .page-title")
     title = clean_text(title_el.get_text()) if title_el else ""
 
     identifier = extract_identifier(url, title, text)
     status = extract_status(text)
     summary_snippet = text[:300] if text else ""
+
+    # Vermont statute cleanup:
+    # if this is a statute page and the title is generic, use the identifier
+    # plus any visible section heading if available.
+    if "/statutes/section/" in url:
+        heading_candidates = soup.select("h1, h2, h3, .section-title")
+        heading_text = ""
+        for el in heading_candidates:
+            candidate = clean_text(el.get_text())
+            if candidate and candidate.lower() not in {"vermont laws", "statutes"}:
+                heading_text = candidate
+                break
+
+        if identifier and heading_text:
+            title = f"{identifier} - {heading_text}"
+        elif identifier:
+            title = identifier
+
+        status = "Current law"
 
     return {
         "source_url": url,
