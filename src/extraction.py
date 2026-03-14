@@ -23,6 +23,10 @@ def extract_identifier_from_url(url):
     if ny_match:
         return ny_match.group(1).upper()
 
+    vt_match = re.search(r"/bill/status/\d{4}/([HS]\.\d+)", url, re.IGNORECASE)
+    if vt_match:
+        return vt_match.group(1).upper()
+
     return None
 
 
@@ -30,13 +34,17 @@ def extract_identifier_from_title(title):
     if not title:
         return None
 
-    match = re.search(r"\b(AB|SB|ACA|SCA|AJR|SJR)[-\s]*(\d+)\b", title, re.IGNORECASE)
-    if match:
-        return f"{match.group(1).upper()} {match.group(2)}"
+    ca_match = re.search(r"\b(AB|SB|ACA|SCA|AJR|SJR)[-\s]*(\d+)\b", title, re.IGNORECASE)
+    if ca_match:
+        return f"{ca_match.group(1).upper()} {ca_match.group(2)}"
 
     ny_match = re.search(r"\b([SA])(\d+)\b", title, re.IGNORECASE)
     if ny_match:
         return f"{ny_match.group(1).upper()}{ny_match.group(2)}"
+
+    vt_match = re.search(r"\b([HS])\.(\d+)\b", title, re.IGNORECASE)
+    if vt_match:
+        return f"{vt_match.group(1).upper()}.{vt_match.group(2)}"
 
     return None
 
@@ -45,6 +53,7 @@ def extract_identifier_from_text(text):
     patterns = [
         r"\b(AB|SB|ACA|SCA|AJR|SJR)[-\s]*(\d+)\b",
         r"\b([SA])(\d+)\b",
+        r"\b([HS])\.(\d+)\b",
         r"\b(HB|SB)[-\s]*(\d+)\b",
         r"\bChapter\s+(\d+)\b",
         r"\bc\.\s*(\d+)\b",
@@ -53,9 +62,13 @@ def extract_identifier_from_text(text):
     for pattern in patterns:
         match = re.search(pattern, text, re.IGNORECASE)
         if match:
-            if len(match.groups()) >= 2:
-                return f"{match.group(1).upper()} {match.group(2)}".replace(" ", "")
-            return match.group(0)
+            g1 = match.group(1).upper()
+            g2 = match.group(2)
+            if g1 in {"H", "S"} and "." in pattern:
+                return f"{g1}.{g2}"
+            if g1 in {"A", "S"} and pattern == r"\b([SA])(\d+)\b":
+                return f"{g1}{g2}"
+            return f"{g1} {g2}"
 
     return None
 
@@ -77,7 +90,7 @@ def extract_status(text):
         return "Amended"
     if "passed the assembly" in text_lower or "passed the senate" in text_lower:
         return "Passed"
-    if "in committee" in text_lower:
+    if "in committee" in text_lower or "referred to committee" in text_lower:
         return "In committee"
     if "introduced by" in text_lower or "introduced" in text_lower:
         return "Introduced"
@@ -104,9 +117,23 @@ def looks_like_real_bill(text):
         "legislative session",
         "sponsor memo",
         "summary of provisions",
+        "as introduced",
+        "house bill",
+        "senate bill",
+        "act relating to",
+        "bill as introduced",
     ]
 
-    return any(signal in text_lower for signal in bill_signals)
+    statute_signals = [
+        "v.s.a.",
+        "statutes",
+        "section",
+        "community land trust",
+        "tax credit",
+        "affordability",
+    ]
+
+    return any(signal in text_lower for signal in bill_signals) or any(signal in text_lower for signal in statute_signals)
 
 
 def matches_keyword(text, keyword):
@@ -116,17 +143,28 @@ def matches_keyword(text, keyword):
         "community land trust": [
             "community land trust",
             "community land trusts",
-            "clt",
+            "shared appreciation",
+            "shared-equity",
+            "shared equity",
+            "permanently affordable",
+            "permanent affordability",
+            "resale restriction",
+            "affordability",
+            "affordable housing development",
+            "covenants or restrictions",
         ],
         "surplus land": [
             "surplus land",
             "surplus lands",
             "public land",
+            "land bank",
         ],
         "shared equity": [
             "shared equity",
             "shared-equity",
-            "equity model",
+            "shared appreciation",
+            "resale restriction",
+            "permanent affordability",
         ],
     }
 
@@ -136,6 +174,7 @@ def matches_keyword(text, keyword):
 
 def extract_ny_api_bill(url):
     from os import getenv
+
     api_key = getenv("NY_OPENLEG_KEY")
     data = fetch_json(url, params={"key": api_key})
 

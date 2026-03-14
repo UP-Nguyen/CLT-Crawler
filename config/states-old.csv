@@ -1,4 +1,4 @@
 state,search_url,source_type
-MA,https://malegislature.gov/Search/FindMyLegislation,legislature
-NY,https://www.nysenate.gov/legislation/bills/search,legislature
-CA,https://leginfo.legislature.ca.gov/faces/billSearchClient.xhtml,legislature
+CA,https://leginfo.legislature.ca.gov/faces/home.xhtml,legislature
+NY,https://legislation.nysenate.gov/api/3/bills/2025/search,legislature api
+VT,https://legislature.vermont.gov/bill/status/2026/H.200,legislature

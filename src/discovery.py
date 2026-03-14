@@ -2,6 +2,8 @@ import os
 import time
 import requests
 from tenacity import retry, stop_after_attempt, wait_exponential
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
 
 
 HEADERS = {
@@ -22,8 +24,12 @@ def fetch_page(url, params=None):
     print(f"FETCHING: {response.url}")
     print(f"STATUS: {response.status_code}")
 
+    # don't retry missing pages
+    if response.status_code == 404:
+        response.raise_for_status()
+
     response.raise_for_status()
-    time.sleep(1)
+    time.sleep(0.5)
     return response
 
 
@@ -131,6 +137,31 @@ def discover_ny_bills_via_api(keyword, session_years=None, limit=25):
     print(f"Generated {len(candidates)} NY API candidates for keyword: {keyword}")
     return candidates
 
+def discover_vt_bills_by_enumeration(keyword, sessions=None, start_num=1, end_num=100, bill_types=None):
+    sessions = sessions or ["2026", "2024"]
+    bill_types = bill_types or ["H", "S"]
+
+    candidates = []
+
+    for session in sessions:
+        for bill_type in bill_types:
+            for number in range(start_num, end_num + 1):
+                url = f"https://legislature.vermont.gov/bill/status/{session}/{bill_type}.{number}"
+                candidates.append({
+                    "state": "VT",
+                    "keyword": keyword,
+                    "source_type": "legislature site",
+                    "candidate_url": url,
+                    "candidate_title": f"{bill_type}.{number}",
+                    "snippet": f"Generated VT {session} bill candidate",
+                    "api_payload": {"session": session},
+                })
+
+    print(
+        f"Generated {len(candidates)} VT bill candidates for keyword: {keyword} "
+        f"({', '.join(sessions)} | {', '.join(bill_types)} {start_num}-{end_num})"
+    )
+    return candidates
 
 def discover_candidates(search_url, keyword, state):
     if state == "CA":
@@ -146,6 +177,17 @@ def discover_candidates(search_url, keyword, state):
             keyword=keyword,
             session_years=["2025","2024", "2023"],
             limit=50,
+        )
+
+    if state == "VT":
+        return (
+            discover_vt_bills_by_enumeration(
+                keyword=keyword,
+                sessions=["2026", "2024"],
+                start_num=1,
+                end_num=100,
+                bill_types=["H", "S"],
+            )
         )
 
     return []
