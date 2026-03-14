@@ -1,7 +1,7 @@
 import re
 from urllib.parse import urlparse, parse_qs
 from bs4 import BeautifulSoup
-from discovery import fetch_page
+from discovery import fetch_page, fetch_json
 
 
 def clean_text(text):
@@ -13,13 +13,15 @@ def extract_identifier_from_url(url):
     query = parse_qs(parsed.query)
     bill_id_vals = query.get("bill_id", [])
 
-    if not bill_id_vals:
-        return None
+    if bill_id_vals:
+        bill_id = bill_id_vals[0]
+        match = re.search(r"(AB|SB|ACA|SCA|AJR|SJR)(\d+)$", bill_id, re.IGNORECASE)
+        if match:
+            return f"{match.group(1).upper()} {match.group(2)}"
 
-    bill_id = bill_id_vals[0]
-    match = re.search(r"(AB|SB|ACA|SCA|AJR|SJR)(\d+)$", bill_id, re.IGNORECASE)
-    if match:
-        return f"{match.group(1).upper()} {match.group(2)}"
+    ny_match = re.search(r"/api/3/bills/\d{4}/([SA]\d+)", url, re.IGNORECASE)
+    if ny_match:
+        return ny_match.group(1).upper()
 
     return None
 
@@ -32,12 +34,17 @@ def extract_identifier_from_title(title):
     if match:
         return f"{match.group(1).upper()} {match.group(2)}"
 
+    ny_match = re.search(r"\b([SA])(\d+)\b", title, re.IGNORECASE)
+    if ny_match:
+        return f"{ny_match.group(1).upper()}{ny_match.group(2)}"
+
     return None
 
 
 def extract_identifier_from_text(text):
     patterns = [
         r"\b(AB|SB|ACA|SCA|AJR|SJR)[-\s]*(\d+)\b",
+        r"\b([SA])(\d+)\b",
         r"\b(HB|SB)[-\s]*(\d+)\b",
         r"\bChapter\s+(\d+)\b",
         r"\bc\.\s*(\d+)\b",
@@ -47,7 +54,7 @@ def extract_identifier_from_text(text):
         match = re.search(pattern, text, re.IGNORECASE)
         if match:
             if len(match.groups()) >= 2:
-                return f"{match.group(1).upper()} {match.group(2)}"
+                return f"{match.group(1).upper()} {match.group(2)}".replace(" ", "")
             return match.group(0)
 
     return None
@@ -64,25 +71,21 @@ def extract_identifier(url, title, text):
 def extract_status(text):
     text_lower = text.lower()
 
-    if "introduced by" in text_lower:
-        return "Introduced"
-    if "amended in" in text_lower:
+    if "approved by governor" in text_lower or "chaptered" in text_lower:
+        return "Enacted / Current law"
+    if "amended" in text_lower:
         return "Amended"
-    if "chaptered" in text_lower:
-        return "Enacted / Current law"
-    if "approved by governor" in text_lower:
-        return "Enacted / Current law"
     if "passed the assembly" in text_lower or "passed the senate" in text_lower:
         return "Passed"
     if "in committee" in text_lower:
         return "In committee"
-    if "introduced" in text_lower:
+    if "introduced by" in text_lower or "introduced" in text_lower:
         return "Introduced"
 
     return "Unknown"
 
 
-def looks_like_real_ca_bill(text):
+def looks_like_real_bill(text):
     text_lower = text.lower()
 
     bill_signals = [
@@ -96,6 +99,11 @@ def looks_like_real_ca_bill(text):
         "appropriation:",
         "fiscal committee:",
         "state-mandated local program:",
+        "senate bill",
+        "assembly bill",
+        "legislative session",
+        "sponsor memo",
+        "summary of provisions",
     ]
 
     return any(signal in text_lower for signal in bill_signals)
@@ -123,7 +131,45 @@ def matches_keyword(text, keyword):
     return any(phrase in text_lower for phrase in phrases)
 
 
+def extract_ny_api_bill(url):
+    from os import getenv
+    api_key = getenv("NY_OPENLEG_KEY")
+    data = fetch_json(url, params={"key": api_key})
+
+    result = data.get("result", {})
+    title = result.get("title", "") or ""
+    summary = result.get("summary", "") or ""
+    base_print_no = result.get("basePrintNo", "") or ""
+    status_desc = result.get("status", {}).get("statusDesc", "") or ""
+
+    amendments = result.get("amendments", {}).get("items", {})
+    amendment_texts = []
+
+    if isinstance(amendments, dict):
+        for _, amendment in amendments.items():
+            full_text = amendment.get("fullText") or ""
+            memo = amendment.get("memo") or ""
+            act_clause = amendment.get("actClause") or ""
+            law_section = amendment.get("lawSection") or ""
+            amendment_texts.extend([law_section, act_clause, memo, full_text])
+
+    raw_text = clean_text(" ".join([title, summary, status_desc] + amendment_texts))
+    identifier = base_print_no or extract_identifier(url, title, raw_text)
+
+    return {
+        "source_url": url,
+        "title": title,
+        "identifier": identifier,
+        "status": status_desc if status_desc else extract_status(raw_text),
+        "summary_snippet": summary[:300] if summary else raw_text[:300],
+        "raw_text": raw_text,
+    }
+
+
 def extract_page_fields(url, source_type="legislature"):
+    if source_type == "legislature api" and "legislation.nysenate.gov/api/3/bills/" in url:
+        return extract_ny_api_bill(url)
+
     response = fetch_page(url)
     soup = BeautifulSoup(response.text, "lxml")
 

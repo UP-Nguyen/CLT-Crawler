@@ -61,3 +61,13 @@ check if it is a real bill
 check if it matches your keyword
 send to extraction/normalize
 save findings_export.csv
+
+# 3/13/2026
+NY Open Legislation API
+- search bills by keyword
+- turn API results into candidates
+- normalize directly
+
+
+TODO: add this to GH actions secrets
+https://legislation.nysenate.gov/public

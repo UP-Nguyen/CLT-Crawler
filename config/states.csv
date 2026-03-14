@@ -1,2 +1,3 @@
 state,search_url,source_type
 CA,https://leginfo.legislature.ca.gov/faces/home.xhtml,legislature
+NY,https://legislation.nysenate.gov/api/3/bills/2025/search,legislature api

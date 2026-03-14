@@ -1,6 +1,6 @@
 import pandas as pd
 from discovery import discover_candidates
-from extraction import extract_page_fields, looks_like_real_ca_bill, matches_keyword
+from extraction import extract_page_fields, looks_like_real_bill, matches_keyword
 from normalize import normalize_record
 from storage import save_csv, save_sqlite
 
@@ -37,7 +37,7 @@ def run_pipeline():
                     )
 
                     raw_text = extracted.get("raw_text", "")
-                    is_real_bill = looks_like_real_ca_bill(raw_text)
+                    is_real_bill = looks_like_real_bill(raw_text)
                     keyword_hit = matches_keyword(raw_text, keyword)
 
                     crawl_log.append({
