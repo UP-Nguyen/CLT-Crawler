@@ -1,15 +1,15 @@
 import pandas as pd
 from datetime import datetime
 from discovery import discover_candidates
-from extraction import extract_page_fields, looks_like_real_bill, matches_keyword
+from extraction import extract_page_fields, looks_like_real_bill, get_match_details
 from normalize import normalize_record
 from storage import save_csv, save_sqlite
 from pathlib import Path
 
 
-DEBUG_STATES = []
-DEBUG_KEYWORDS = []
-SAVE_SQLITE = True
+DEBUG_STATES = ["MA"]
+DEBUG_KEYWORDS = ["community land trust"]
+SAVE_SQLITE = False
 
 def run_pipeline():
     states_df = pd.read_csv("config/states.csv")
@@ -50,7 +50,10 @@ def run_pipeline():
 
                     raw_text = extracted.get("raw_text", "")
                     is_real_bill = looks_like_real_bill(raw_text)
-                    keyword_hit = matches_keyword(raw_text, keyword)
+                    match_details = get_match_details(raw_text, keyword)
+                    keyword_hit = match_details["matched"]
+                    match_reason = match_details["match_reason"]
+                    match_terms = "; ".join(match_details["match_terms"])
 
                     crawl_log.append({
                         "state": candidate.get("state", state),
@@ -62,6 +65,8 @@ def run_pipeline():
                         "status": extracted.get("status", ""),
                         "is_real_bill": is_real_bill,
                         "matches_keyword": keyword_hit,
+                        "match_reason": match_reason,
+                        "match_terms": match_terms,
                     })
 
                     if i % 10 == 0:
@@ -72,6 +77,10 @@ def run_pipeline():
 
                     if not keyword_hit:
                         continue
+
+
+                    candidate["match_reason"] = match_reason
+                    candidate["match_terms"] = match_terms
 
                     normalized = normalize_record(candidate, extracted)
                     all_normalized.append(normalized)

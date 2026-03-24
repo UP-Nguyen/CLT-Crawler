@@ -220,7 +220,7 @@ def discover_candidates(search_url, keyword, state):
             keyword=keyword,
             general_court="194",
             start_num=1,
-            end_num=50,
+            end_num=25,
             bill_types=["H", "S"],
         )
 

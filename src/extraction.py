@@ -173,41 +173,91 @@ def looks_like_real_bill(text):
     return any(signal in text_lower for signal in bill_signals) or any(signal in text_lower for signal in statute_signals)
 
 
-def matches_keyword(text, keyword):
-    text_lower = text.lower()
+def get_match_details(text, keyword):
+    text_lower = (text or "").lower()
 
-    keyword_map = {
+    exact_phrase_map = {
         "community land trust": [
             "community land trust",
             "community land trusts",
-            "shared appreciation",
-            "shared-equity",
+        ],
+        "shared equity": [
             "shared equity",
-            "permanently affordable",
-            "permanent affordability",
-            "resale restriction",
-            "affordability",
-            "affordable housing",
-            "housing tax increment financing",
-            "workforce housing",
+            "shared-equity",
         ],
         "surplus land": [
             "surplus land",
             "surplus lands",
-            "public land",
-            "land bank",
+        ],
+    }
+
+    concept_map = {
+        "community land trust": [
+            "community land trust",
+            "community land trusts",
+            "shared appreciation",
+            "shared equity",
+            "shared-equity",
+            "permanently affordable",
+            "permanent affordability",
+            "resale restriction",
+            "resale restrictions",
+            "ground lease",
+            "affordable housing development",
+            "covenants or restrictions",
         ],
         "shared equity": [
             "shared equity",
             "shared-equity",
             "shared appreciation",
             "resale restriction",
+            "resale restrictions",
+            "ground lease",
             "permanent affordability",
+        ],
+        "surplus land": [
+            "surplus land",
+            "surplus lands",
+            "public land",
+            "land bank",
+            "land banking",
+            "disposition of land",
         ],
     }
 
-    phrases = keyword_map.get(keyword.lower(), [keyword.lower()])
-    return any(phrase in text_lower for phrase in phrases)
+    exact_phrases = exact_phrase_map.get(keyword.lower(), [keyword.lower()])
+    concepts = concept_map.get(keyword.lower(), [keyword.lower()])
+
+    exact_hits = [p for p in exact_phrases if p in text_lower]
+    concept_hits = [c for c in concepts if c in text_lower]
+
+    # remove duplicates while preserving order
+    seen = set()
+    concept_hits = [x for x in concept_hits if not (x in seen or seen.add(x))]
+
+    if exact_hits:
+        return {
+            "matched": True,
+            "match_reason": f"exact_phrase:{exact_hits[0]}",
+            "match_terms": concept_hits,
+        }
+
+    if len(concept_hits) >= 2:
+        return {
+            "matched": True,
+            "match_reason": f"concept_combo:{', '.join(concept_hits[:2])}",
+            "match_terms": concept_hits,
+        }
+
+    return {
+        "matched": False,
+        "match_reason": "",
+        "match_terms": concept_hits,
+    }
+
+
+def matches_keyword(text, keyword):
+    return get_match_details(text, keyword)["matched"]
 
 
 def extract_ny_api_bill(url):

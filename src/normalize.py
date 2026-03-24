@@ -118,6 +118,8 @@ def map_record_category(discovery_row, extracted_row):
 def normalize_record(discovery_row, extracted_row):
     keywords = [discovery_row["keyword"]]
     api_payload = discovery_row.get("api_payload") or {}
+    match_reason = discovery_row.get("match_reason", "")
+    match_terms = discovery_row.get("match_terms", "")
 
     normalized = {
         "state": discovery_row["state"],
@@ -134,6 +136,8 @@ def normalize_record(discovery_row, extracted_row):
         "airtable_category": map_record_category(discovery_row, extracted_row),
         "content_hash": make_content_hash(extracted_row.get("raw_text", "")),
         "session": api_payload.get("session", ""),
+        "match_reason": match_reason,
+        "match_terms": match_terms,
     }
 
     return normalized
