@@ -76,6 +76,14 @@ AL statutes by seeded title/chapter ranges
 - extract + match
 - findings_export.csv
 
+NOTE: working as a targeted legal-source retriever, not as a self-discovering crawler. 
+
+seeded statute URLs
+> fetch
+> extract
+> match
+> export
+
 TODO: add this to GH actions secrets
 https://legislation.nysenate.gov/public
 
