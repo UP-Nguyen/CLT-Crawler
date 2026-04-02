@@ -1,5 +1,11 @@
 # CLT-Crawler
 
+A true crawler does two things:
+1) discovers sources on its own
+2) extracts and classifies them
+
+Ideally, we do (1) for all states, but these sites are tricky. Sometimes we have to point them in the right direction (seeds)
+
 # Discover > Extract > Normalize and Store
 # The point of the web crawler is change detection, 
 
@@ -68,7 +74,12 @@ NY Open Legislation API
 - turn API results into candidates
 - normalize directly
 
-# 4/1
+# 4/1 status update
+
+CA: closer to a real crawler, because it generates bill URLs on its own
+NY: real discovery through the API
+VT / MA bills: real discovery through enumeration
+AL: working extractor/matcher, but discovery is still seeded
 
 ## Alabama
 AL statutes by seeded title/chapter ranges
@@ -83,6 +94,8 @@ seeded statute URLs
 > extract
 > match
 > export
+
+
 
 TODO: add this to GH actions secrets
 https://legislation.nysenate.gov/public
