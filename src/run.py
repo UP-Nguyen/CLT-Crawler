@@ -1,13 +1,19 @@
 import pandas as pd
 from datetime import datetime
 from discovery import discover_candidates
-from extraction import extract_page_fields, looks_like_real_bill, get_match_details
+from extraction import (
+    extract_page_fields,
+    looks_like_real_bill,
+    matches_keyword,
+    get_match_details,
+    is_ma_review_candidate,
+)
 from normalize import normalize_record
 from storage import save_csv, save_sqlite
 from pathlib import Path
 
 
-DEBUG_STATES = ["MA"]
+DEBUG_STATES = ["AL"]
 DEBUG_KEYWORDS = ["community land trust"]
 SAVE_SQLITE = False
 
@@ -49,11 +55,32 @@ def run_pipeline():
                     )
 
                     raw_text = extracted.get("raw_text", "")
-                    is_real_bill = looks_like_real_bill(raw_text)
-                    match_details = get_match_details(raw_text, keyword)
+                    is_real_legal_source = looks_like_real_bill(raw_text)
+
+                    match_text = raw_text
+
+
+                    if state == "AL" and candidate.get("source_type") == "code site":
+                        fallback_text = " ".join([
+                            candidate.get("candidate_title", ""),
+                            candidate.get("snippet", ""),
+                            extracted.get("title", ""),
+                            extracted.get("summary_snippet", ""),
+                        ])
+                        if len((raw_text or "").strip()) < 100:
+                            match_text = fallback_text
+
+                    match_details = get_match_details(match_text, keyword, state=state)
                     keyword_hit = match_details["matched"]
                     match_reason = match_details["match_reason"]
-                    match_terms = "; ".join(match_details["match_terms"])
+                    match_terms_list = match_details["match_terms"]
+                    match_terms = "; ".join(match_terms_list)
+
+                    review_candidate = False
+                    review_terms = []
+
+                    if state == "MA":
+                        review_candidate, review_terms = is_ma_review_candidate(raw_text)
 
                     crawl_log.append({
                         "state": candidate.get("state", state),
@@ -63,21 +90,41 @@ def run_pipeline():
                         "extracted_title": extracted.get("title", ""),
                         "identifier": extracted.get("identifier", ""),
                         "status": extracted.get("status", ""),
-                        "is_real_bill": is_real_bill,
+                        "is_real_legal_source": is_real_legal_source,
                         "matches_keyword": keyword_hit,
                         "match_reason": match_reason,
                         "match_terms": match_terms,
+                        "review_candidate": review_candidate,
+                        "review_terms": "; ".join(review_terms),
                     })
 
                     if i % 10 == 0:
                         print(f"Checked {i} candidates for {state} | {keyword}")
 
-                    if not is_real_bill:
-                        continue
+                    raw_text = extracted.get("raw_text", "")
+                    is_real_legal_source = looks_like_real_bill(raw_text)
 
-                    if not keyword_hit:
-                        continue
+                    # Alabama code pages are valid legal sources even if they do not look like bill pages (they're statutues)
+                    if state == "AL" and candidate.get("source_type") == "code site":
+                        is_real_legal_source = True
 
+                    match_text = raw_text
+
+                    if state == "AL" and candidate.get("source_type") == "code site":
+                        fallback_text = " ".join([
+                            candidate.get("candidate_title", ""),
+                            candidate.get("snippet", ""),
+                            extracted.get("title", ""),
+                            extracted.get("summary_snippet", ""),
+                        ])
+                        if len((raw_text or "").strip()) < 100:
+                            match_text = fallback_text
+
+                    match_details = get_match_details(match_text, keyword, state=state)
+                    keyword_hit = match_details["matched"]
+                    match_reason = match_details["match_reason"]
+                    match_terms_list = match_details["match_terms"]
+                    match_terms = "; ".join(match_terms_list)
 
                     candidate["match_reason"] = match_reason
                     candidate["match_terms"] = match_terms
@@ -85,9 +132,17 @@ def run_pipeline():
                     normalized = normalize_record(candidate, extracted)
                     all_normalized.append(normalized)
 
-                    print(f"MATCH: {normalized['state']} | {normalized['identifier']} -> {normalized['source_url']}")
+                    print(f"MATCH: {normalized['state']} | {normalized['identifier']} -> {normalized['source_url']} ({match_reason})")
 
                 except Exception as e:
+
+                    raw_text = extracted.get("raw_text", "")
+                    is_real_legal_source = looks_like_real_bill(raw_text)
+
+                    # Alabama code pages are valid legal sources even if they do not look like bill pages
+                    if state == "AL" and candidate.get("source_type") == "code site":
+                        is_real_legal_source = True
+
                     crawl_log.append({
                         "state": candidate.get("state", state),
                         "keyword": keyword,
@@ -96,7 +151,7 @@ def run_pipeline():
                         "extracted_title": "",
                         "identifier": "",
                         "status": "",
-                        "is_real_bill": False,
+                        "is_real_legal_source": False,
                         "matches_keyword": False,
                         "error": str(e),
                     })
@@ -106,7 +161,7 @@ def run_pipeline():
             subset = subset[(subset["state"] == state) & (subset["keyword"] == keyword)]
             if not subset.empty:
                 print(f"{state} | {keyword} total checked: {len(subset)}")
-                print(f"{state} | {keyword} real bills/statutes: {int(subset['is_real_bill'].fillna(False).sum())}")
+                print(f"{state} | {keyword} real bills/statutes: {int(subset['is_real_legal_source'].fillna(False).sum())}")
                 print(f"{state} | {keyword} keyword hits: {int(subset['matches_keyword'].fillna(False).sum())}")
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

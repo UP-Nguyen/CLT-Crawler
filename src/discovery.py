@@ -184,7 +184,54 @@ def discover_ma_bills_by_enumeration(keyword, general_court="194", start_num=1, 
     )
     return candidates
 
-
+def discover_al_statute_seeds(keyword):
+    return [
+        {
+            "state": "AL",
+            "keyword": keyword,
+            "source_type": "code site",
+            "candidate_url": "https://alison.legislature.state.al.us/code-of-alabama?section=24-10-1",
+            "candidate_title": "Ala. Code § 24-10-1",
+            "snippet": "Alabama Affordable Housing Act - short title",
+            "api_payload": None,
+        },
+        {
+            "state": "AL",
+            "keyword": keyword,
+            "source_type": "code site",
+            "candidate_url": "https://alison.legislature.state.al.us/code-of-alabama?section=24-10-4",
+            "candidate_title": "Ala. Code § 24-10-4",
+            "snippet": "Alabama Affordable Housing Trust Fund",
+            "api_payload": None,
+        },
+        {
+            "state": "AL",
+            "keyword": keyword,
+            "source_type": "code site",
+            "candidate_url": "https://alison.legislature.state.al.us/code-of-alabama?section=24-10-6",
+            "candidate_title": "Ala. Code § 24-10-6",
+            "snippet": "Affordable housing purposes",
+            "api_payload": None,
+        },
+        {
+            "state": "AL",
+            "keyword": keyword,
+            "source_type": "code site",
+            "candidate_url": "https://alison.legislature.state.al.us/code-of-alabama?section=24-10-7",
+            "candidate_title": "Ala. Code § 24-10-7",
+            "snippet": "Affordable housing goals and priorities",
+            "api_payload": None,
+        },
+        {
+            "state": "AL",
+            "keyword": keyword,
+            "source_type": "code site",
+            "candidate_url": "https://alison.legislature.state.al.us/code-of-alabama?section=24-1-40.1",
+            "candidate_title": "Ala. Code § 24-1-40.1",
+            "snippet": "Tax exemption for municipal housing authorities",
+            "api_payload": None,
+        },
+    ]
 
 
 
@@ -220,8 +267,11 @@ def discover_candidates(search_url, keyword, state):
             keyword=keyword,
             general_court="194",
             start_num=1,
-            end_num=25,
+            end_num=50,
             bill_types=["H", "S"],
         )
+    
+    if state == "AL":
+        return discover_al_statute_seeds(keyword)
 
     return []

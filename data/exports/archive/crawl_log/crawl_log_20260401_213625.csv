@@ -1,4 +1,4 @@
-state,keyword,candidate_title,candidate_url,extracted_title,identifier,status,is_real_legal_source,matches_keyword,match_reason,match_terms,review_candidate,review_terms
+state,keyword,candidate_title,candidate_url,extracted_title,identifier,status,is_real_bill,matches_keyword,match_reason,match_terms,review_candidate,review_terms
 AL,community land trust,Ala. Code § 24-10-1,https://alison.legislature.state.al.us/code-of-alabama?section=24-10-1,Alabama Legislature,Ala. Code § 24-10-1,Unknown,False,True,state_fallback_al:affordable housing,affordable housing; affordable housing act,False,
 AL,community land trust,Ala. Code § 24-10-4,https://alison.legislature.state.al.us/code-of-alabama?section=24-10-4,Alabama Legislature,Ala. Code § 24-10-4,Unknown,False,True,state_fallback_al:affordable housing,affordable housing; affordable housing trust fund; housing trust fund,False,
 AL,community land trust,Ala. Code § 24-10-6,https://alison.legislature.state.al.us/code-of-alabama?section=24-10-6,Alabama Legislature,Ala. Code § 24-10-6,Unknown,False,True,state_fallback_al:affordable housing,affordable housing,False,

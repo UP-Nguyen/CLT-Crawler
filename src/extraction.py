@@ -18,6 +18,10 @@ def extract_identifier_from_url(url):
         match = re.search(r"(AB|SB|ACA|SCA|AJR|SJR)(\d+)$", bill_id, re.IGNORECASE)
         if match:
             return f"{match.group(1).upper()} {match.group(2)}"
+        
+    al_match = re.search(r"[?&]section=(\d+-\d+-\d+(?:\.\d+)?)", url, re.IGNORECASE)
+    if al_match:
+        return f"Ala. Code § {al_match.group(1)}"  
 
     ny_match = re.search(r"/api/3/bills/\d{4}/([SA]\d+)", url, re.IGNORECASE)
     if ny_match:
@@ -150,31 +154,36 @@ def looks_like_real_bill(text):
         "summary of provisions",
         "as introduced",
         "house bill",
-        "senate bill",
         "act relating to",
         "bill as introduced",
         "bill information",
         "view text",
         "print preview",
         "download pdf",
-        "general laws",
-        "section 60",
+        "general court",
+        "petition (accompanied by bill",
     ]
 
     statute_signals = [
         "v.s.a.",
         "statutes",
         "section",
-        "community land trust",
-        "tax credit",
-        "affordability",
+        "general laws",
+        "mgl c.",
+        "code of alabama",
+        "ala. code",
+        "affordable housing act",
+        "affordable housing trust fund",
+        "housing authority",
+        "tax exemption",
     ]
 
     return any(signal in text_lower for signal in bill_signals) or any(signal in text_lower for signal in statute_signals)
 
 
-def get_match_details(text, keyword):
+def get_match_details(text, keyword, state=None):
     text_lower = (text or "").lower()
+    state = (state or "").upper()
 
     exact_phrase_map = {
         "community land trust": [
@@ -204,7 +213,12 @@ def get_match_details(text, keyword):
             "resale restrictions",
             "ground lease",
             "affordable housing development",
+            "affordable housing",
             "covenants or restrictions",
+            "workforce housing",
+            "housing tax increment financing",
+            "housing authority",
+            "tax exemption",
         ],
         "shared equity": [
             "shared equity",
@@ -229,11 +243,13 @@ def get_match_details(text, keyword):
     concepts = concept_map.get(keyword.lower(), [keyword.lower()])
 
     exact_hits = [p for p in exact_phrases if p in text_lower]
-    concept_hits = [c for c in concepts if c in text_lower]
 
-    # remove duplicates while preserving order
     seen = set()
-    concept_hits = [x for x in concept_hits if not (x in seen or seen.add(x))]
+    concept_hits = []
+    for c in concepts:
+        if c in text_lower and c not in seen:
+            concept_hits.append(c)
+            seen.add(c)
 
     if exact_hits:
         return {
@@ -241,6 +257,47 @@ def get_match_details(text, keyword):
             "match_reason": f"exact_phrase:{exact_hits[0]}",
             "match_terms": concept_hits,
         }
+
+    if state == "AL":
+        al_terms = [
+            "affordable housing",
+            "affordable housing act",
+            "affordable housing trust fund",
+            "housing trust fund",
+            "housing authority",
+            "tax exemption",
+        ]
+        al_hits = [term for term in al_terms if term in text_lower]
+
+        if len(al_hits) >= 1:
+            return {
+                "matched": True,
+                "match_reason": f"state_fallback_al:{al_hits[0]}",
+                "match_terms": al_hits,
+            }
+
+    if state == "MA":
+        ma_terms = [
+            "affordable housing",
+            "affordable housing development",
+            "permanent affordability",
+            "permanently affordable",
+            "resale restriction",
+            "resale restrictions",
+            "ground lease",
+            "shared equity",
+            "shared-equity",
+            "workforce housing",
+            "housing tax increment financing",
+        ]
+        ma_hits = [term for term in ma_terms if term in text_lower]
+
+        if len(ma_hits) >= 1:
+            return {
+                "matched": False,
+                "match_reason": "",
+                "match_terms": ma_hits,
+            }
 
     if len(concept_hits) >= 2:
         return {
@@ -256,9 +313,28 @@ def get_match_details(text, keyword):
     }
 
 
-def matches_keyword(text, keyword):
-    return get_match_details(text, keyword)["matched"]
+def matches_keyword(text, keyword, state=None):
+    return get_match_details(text, keyword, state=state)["matched"]
 
+
+def is_ma_review_candidate(text):
+    text_lower = (text or "").lower()
+
+    ma_review_terms = [
+        "affordable housing",
+        "workforce housing",
+        "permanent affordability",
+        "permanently affordable",
+        "resale restriction",
+        "resale restrictions",
+        "shared equity",
+        "shared-equity",
+        "ground lease",
+        "covenants or restrictions",
+    ]
+
+    hits = [term for term in ma_review_terms if term in text_lower]
+    return len(hits) >= 1, hits
 
 def extract_ny_api_bill(url):
     from os import getenv
@@ -303,19 +379,54 @@ def extract_page_fields(url, source_type="legislature"):
     response = fetch_page(url)
     soup = BeautifulSoup(response.text, "lxml")
 
-    text = clean_text(soup.get_text(" ", strip=True))
+    # Remove obvious page chrome
+    for tag in soup.select("nav, header, footer, script, style, noscript, form"):
+        tag.decompose()
 
-    # Default title extraction
-    title_el = soup.select_one("h1, h2, title, .bill-title, .page-title")
+    # Try to target the main content first
+    main_selectors = [
+        "main",
+        "#main-content",
+        ".main-content",
+        ".bill-content",
+        ".content",
+        ".container",
+    ]
+
+    main_text = ""
+    for selector in main_selectors:
+        el = soup.select_one(selector)
+        if el:
+            candidate_text = clean_text(el.get_text(" ", strip=True))
+            if len(candidate_text) > len(main_text):
+                main_text = candidate_text
+
+    # fallback to full page if needed
+    full_text = clean_text(soup.get_text(" ", strip=True))
+    text = main_text if len(main_text) > 200 else full_text
+
+    # Clean out common MA page chrome phrases
+    junk_phrases = [
+        "skip to content",
+        "mylegislature",
+        "sign in with mylegislature account",
+        "the 194th general court of the commonwealth of massachusetts",
+        "email* password*",
+        "march 23, 2026",
+    ]
+    text_lower = text.lower()
+    for phrase in junk_phrases:
+        text_lower = text_lower.replace(phrase, " ")
+    text = clean_text(text_lower)
+
+    title_el = soup.select_one("h1, h2, .bill-title, .page-title, title")
     title = clean_text(title_el.get_text()) if title_el else ""
 
     identifier = extract_identifier(url, title, text)
     status = extract_status(text)
     summary_snippet = text[:300] if text else ""
 
-    # Vermont statute cleanup:
-    # if this is a statute page and the title is generic, use the identifier
-    # plus any visible section heading if available.
+    # Vermont statute cleanup
     if "/statutes/section/" in url:
         heading_candidates = soup.select("h1, h2, h3, .section-title")
         heading_text = ""

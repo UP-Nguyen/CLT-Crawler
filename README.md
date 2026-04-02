@@ -68,6 +68,13 @@ NY Open Legislation API
 - turn API results into candidates
 - normalize directly
 
+# 4/1
+
+## Alabama
+AL statutes by seeded title/chapter ranges
+- official Code of Alabama section pages
+- extract + match
+- findings_export.csv
 
 TODO: add this to GH actions secrets
 https://legislation.nysenate.gov/public
