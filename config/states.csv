@@ -1,5 +1,6 @@
 state,search_url,source_type
 AL,https://alison.legislature.state.al.us/code-of-alabama,code site
+AR,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=HB,legislature
 CA,https://leginfo.legislature.ca.gov/faces/home.xhtml,legislature
 MA,https://malegislature.gov/Bills/194/H194,legislature
 NY,https://legislation.nysenate.gov/api/3/bills/2025/search,legislature api

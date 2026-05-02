@@ -22,6 +22,14 @@ def extract_identifier_from_url(url):
     al_match = re.search(r"[?&]section=(\d+-\d+-\d+(?:\.\d+)?)", url, re.IGNORECASE)
     if al_match:
         return f"Ala. Code § {al_match.group(1)}"
+    
+    ar_bill_match = re.search(r"\b(HB|SB)\d+\b", title, re.IGNORECASE)
+    if ar_bill_match:
+        return ar_bill_match.group(0).upper()
+
+    ar_code_match = re.search(r"Ark\.?\s*Code\.?\s*(?:Ann\.)?\s*§\s*(\d+-\d+-\d+(?:\.\d+)?)", text, re.IGNORECASE)
+    if ar_code_match:
+        return f"Ark. Code Ann. § {ar_code_match.group(1)}"    
 
     ny_match = re.search(r"/api/3/bills/\d{4}/([SA]\d+)", url, re.IGNORECASE)
     if ny_match:
@@ -181,6 +189,10 @@ def looks_like_real_bill(text):
         "tax exemption",
         "wash. rev. code",
         "rcw",
+        "arkansas housing trust fund",
+        "affordable neighborhood housing tax credit",
+        "ark. code ann.",
+        "act 365",
     ]
 
     return any(signal in text_lower for signal in bill_signals) or any(signal in text_lower for signal in statute_signals)
@@ -280,6 +292,25 @@ def get_match_details(text, keyword, state=None):
                 "match_reason": f"state_fallback_al:{al_hits[0]}",
                 "match_terms": al_hits,
             }
+        
+    if state == "AR":
+        ar_terms = [
+            "affordable housing",
+            "housing trust fund",
+            "arkansas housing trust fund",
+            "affordable neighborhood housing tax credit",
+            "tax credit",
+            "housing authority",
+            "low income housing",
+        ]
+        ar_hits = [term for term in ar_terms if term in text_lower]
+
+        if len(ar_hits) >= 1:
+            return {
+                "matched": True,
+                "match_reason": f"state_fallback_ar:{ar_hits[0]}",
+                "match_terms": ar_hits,
+            }        
 
     if state == "MA":
         ma_terms = [

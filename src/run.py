@@ -13,7 +13,7 @@ from normalize import normalize_record
 from storage import save_csv, save_sqlite
 
 
-DEBUG_STATES = ["WA"]
+DEBUG_STATES = ["AR"]
 DEBUG_KEYWORDS = ["community land trust"]
 SAVE_SQLITE = False
 
@@ -58,7 +58,7 @@ def run_pipeline():
                     raw_text = extracted.get("raw_text", "")
                     is_real_legal_source = looks_like_real_bill(raw_text)
 
-                    if state in {"AL", "WA"} and candidate.get("source_type") == "code site":
+                    if state in {"AL", "WA", "AR"} and candidate.get("source_type") == "code site":
                         is_real_legal_source = True
 
                     match_text = raw_text

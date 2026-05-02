@@ -235,6 +235,86 @@ def discover_al_statute_seeds(keyword):
         },
     ]
 
+import re
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+
+
+def discover_ar_bills_from_listing(keyword, listing_urls=None):
+    listing_urls = listing_urls or [
+        "https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=HB",
+        "https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=SB",
+    ]
+
+    candidates = []
+    seen = set()
+
+    for listing_url in listing_urls:
+        response = fetch_page(listing_url)
+        soup = BeautifulSoup(response.text, "lxml")
+
+        for link in soup.find_all("a", href=True):
+            href = link["href"]
+            full_url = urljoin(listing_url, href)
+            link_text = " ".join(link.get_text(" ", strip=True).split())
+
+            # Arkansas bill detail pages usually live under /Bills/Detail or similar bill paths
+            if "/Bills/" not in full_url:
+                continue
+
+            # avoid PDFs for now
+            if full_url.lower().endswith(".pdf") or "ftpdocument" in full_url.lower():
+                continue
+
+            if full_url in seen:
+                continue
+            seen.add(full_url)
+
+            candidates.append({
+                "state": "AR",
+                "keyword": keyword,
+                "source_type": "legislature site",
+                "candidate_url": full_url,
+                "candidate_title": link_text,
+                "snippet": "Discovered from Arkansas bill listing",
+                "api_payload": None,
+            })
+
+    print(f"Generated {len(candidates)} AR bill candidates for keyword: {keyword}")
+    return candidates
+
+
+def discover_ar_statute_seeds(keyword):
+    return [
+        {
+            "state": "AR",
+            "keyword": keyword,
+            "source_type": "code site",
+            "candidate_url": "https://arkleg.state.ar.us/ArkansasLaw",
+            "candidate_title": "Arkansas Law portal",
+            "snippet": "Official Arkansas law portal",
+            "api_payload": None,
+        },
+        {
+            "state": "AR",
+            "keyword": keyword,
+            "source_type": "code site",
+            "candidate_url": "https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2023R%2FPublic%2FACT365.pdf",
+            "candidate_title": "Act 365 of 2023",
+            "snippet": "Amends Arkansas Housing Trust Fund provisions including § 15-5-1705(c)",
+            "api_payload": None,
+        },
+        {
+            "state": "AR",
+            "keyword": keyword,
+            "source_type": "code site",
+            "candidate_url": "https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2009%2FPublic%2F661.pdf",
+            "candidate_title": "Act creating Arkansas Housing Trust Fund",
+            "snippet": "Creates Arkansas Housing Trust Fund; references § 15-5-1704",
+            "api_payload": None,
+        },
+    ]
+
 def discover_wa_rcw_known_good(keyword, citations=None):
     citations = citations or [
         "43.185A.010",
@@ -361,6 +441,12 @@ def discover_candidates(search_url, keyword, state):
             chapter_pages=[
                 "https://app.leg.wa.gov/rcw/default.aspx?cite=43.185A",
             ],
+        )
+
+    if state == "AR":
+        return (
+            discover_ar_bills_from_listing(keyword)
+            + discover_ar_statute_seeds(keyword)
         )
 
     return []
