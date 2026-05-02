@@ -58,13 +58,11 @@ def run_pipeline():
                     raw_text = extracted.get("raw_text", "")
                     is_real_legal_source = looks_like_real_bill(raw_text)
 
-                    # AL / WA code pages are valid legal sources even if they do not look like bills
                     if state in {"AL", "WA"} and candidate.get("source_type") == "code site":
                         is_real_legal_source = True
 
                     match_text = raw_text
 
-                    # Alabama can fall back to seeded metadata if page text is thin
                     if state == "AL" and candidate.get("source_type") == "code site":
                         fallback_text = " ".join([
                             candidate.get("candidate_title", ""),

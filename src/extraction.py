@@ -338,6 +338,19 @@ def get_match_details(text, keyword, state=None):
                 "match_terms": wa_hits,
             }
 
+    if len(concept_hits) >= 2:
+        return {
+            "matched": True,
+            "match_reason": f"concept_combo:{', '.join(concept_hits[:2])}",
+            "match_terms": concept_hits,
+        }
+
+    return {
+        "matched": False,
+        "match_reason": "",
+        "match_terms": concept_hits,
+    }
+
 
 def matches_keyword(text, keyword, state=None):
     return get_match_details(text, keyword, state=state)["matched"]
