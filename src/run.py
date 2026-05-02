@@ -1,21 +1,22 @@
 import pandas as pd
 from datetime import datetime
+from pathlib import Path
+
 from discovery import discover_candidates
 from extraction import (
     extract_page_fields,
     looks_like_real_bill,
-    matches_keyword,
     get_match_details,
     is_ma_review_candidate,
 )
 from normalize import normalize_record
 from storage import save_csv, save_sqlite
-from pathlib import Path
 
 
 DEBUG_STATES = ["WA"]
 DEBUG_KEYWORDS = ["community land trust"]
 SAVE_SQLITE = False
+
 
 def run_pipeline():
     states_df = pd.read_csv("config/states.csv")
@@ -51,15 +52,19 @@ def run_pipeline():
                 try:
                     extracted = extract_page_fields(
                         candidate["candidate_url"],
-                        source_type=candidate.get("source_type", default_source_type)
+                        source_type=candidate.get("source_type", default_source_type),
                     )
 
                     raw_text = extracted.get("raw_text", "")
                     is_real_legal_source = looks_like_real_bill(raw_text)
 
+                    # AL / WA code pages are valid legal sources even if they do not look like bills
+                    if state in {"AL", "WA"} and candidate.get("source_type") == "code site":
+                        is_real_legal_source = True
+
                     match_text = raw_text
 
-
+                    # Alabama can fall back to seeded metadata if page text is thin
                     if state == "AL" and candidate.get("source_type") == "code site":
                         fallback_text = " ".join([
                             candidate.get("candidate_title", ""),
@@ -101,30 +106,11 @@ def run_pipeline():
                     if i % 10 == 0:
                         print(f"Checked {i} candidates for {state} | {keyword}")
 
-                    raw_text = extracted.get("raw_text", "")
-                    is_real_legal_source = looks_like_real_bill(raw_text)
+                    if not is_real_legal_source:
+                        continue
 
-                    # Alabama code pages are valid legal sources even if they do not look like bill pages (they're statutues)
-                    if state == "AL" and candidate.get("source_type") == "code site":
-                        is_real_legal_source = True
-
-                    match_text = raw_text
-
-                    if state == "AL" and candidate.get("source_type") == "code site":
-                        fallback_text = " ".join([
-                            candidate.get("candidate_title", ""),
-                            candidate.get("snippet", ""),
-                            extracted.get("title", ""),
-                            extracted.get("summary_snippet", ""),
-                        ])
-                        if len((raw_text or "").strip()) < 100:
-                            match_text = fallback_text
-
-                    match_details = get_match_details(match_text, keyword, state=state)
-                    keyword_hit = match_details["matched"]
-                    match_reason = match_details["match_reason"]
-                    match_terms_list = match_details["match_terms"]
-                    match_terms = "; ".join(match_terms_list)
+                    if not keyword_hit:
+                        continue
 
                     candidate["match_reason"] = match_reason
                     candidate["match_terms"] = match_terms
@@ -132,20 +118,12 @@ def run_pipeline():
                     normalized = normalize_record(candidate, extracted)
                     all_normalized.append(normalized)
 
-                    print(f"MATCH: {normalized['state']} | {normalized['identifier']} -> {normalized['source_url']} ({match_reason})")
+                    print(
+                        f"MATCH: {normalized['state']} | {normalized['identifier']} -> "
+                        f"{normalized['source_url']} ({match_reason})"
+                    )
 
                 except Exception as e:
-
-                    raw_text = extracted.get("raw_text", "")
-                    is_real_legal_source = looks_like_real_bill(raw_text)
-
-                    # Alabama code pages are valid legal sources even if they do not look like bill pages
-                    if state == "AL" and candidate.get("source_type") == "code site":
-                        is_real_legal_source = True
-
-                    if state == "WA" and candidate.get("source_type") == "code site":
-                        is_real_legal_source = True    
-
                     crawl_log.append({
                         "state": candidate.get("state", state),
                         "keyword": keyword,
@@ -156,19 +134,32 @@ def run_pipeline():
                         "status": "",
                         "is_real_legal_source": False,
                         "matches_keyword": False,
+                        "match_reason": "",
+                        "match_terms": "",
+                        "review_candidate": False,
+                        "review_terms": "",
                         "error": str(e),
                     })
                     print(f"Extraction failed for {candidate['candidate_url']}: {e}")
+                    continue
 
             subset = pd.DataFrame(crawl_log)
-            subset = subset[(subset["state"] == state) & (subset["keyword"] == keyword)]
+            subset = subset[
+                (subset["state"] == state) &
+                (subset["keyword"] == keyword)
+            ]
             if not subset.empty:
                 print(f"{state} | {keyword} total checked: {len(subset)}")
-                print(f"{state} | {keyword} real bills/statutes: {int(subset['is_real_legal_source'].fillna(False).sum())}")
-                print(f"{state} | {keyword} keyword hits: {int(subset['matches_keyword'].fillna(False).sum())}")
+                print(
+                    f"{state} | {keyword} real bills/statutes: "
+                    f"{int(subset['is_real_legal_source'].fillna(False).sum())}"
+                )
+                print(
+                    f"{state} | {keyword} keyword hits: "
+                    f"{int(subset['matches_keyword'].fillna(False).sum())}"
+                )
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
 
     exports_dir = Path("data/exports")
     archive_crawl_dir = exports_dir / "archive" / "crawl_log"
@@ -181,7 +172,7 @@ def run_pipeline():
     save_csv(crawl_log_df.to_dict(orient="records"), str(exports_dir / "crawl_log.csv"))
     save_csv(
         crawl_log_df.to_dict(orient="records"),
-        str(archive_crawl_dir / f"crawl_log_{timestamp}.csv")
+        str(archive_crawl_dir / f"crawl_log_{timestamp}.csv"),
     )
 
     if all_normalized:
@@ -193,7 +184,7 @@ def run_pipeline():
         save_csv(findings_records, str(exports_dir / "findings_export.csv"))
         save_csv(
             findings_records,
-            str(archive_findings_dir / f"findings_export_{timestamp}.csv")
+            str(archive_findings_dir / f"findings_export_{timestamp}.csv"),
         )
 
         if SAVE_SQLITE:

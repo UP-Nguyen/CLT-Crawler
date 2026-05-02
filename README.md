@@ -119,3 +119,11 @@ For a full run:
 DEBUG_STATES = []
 DEBUG_KEYWORDS = []
 SAVE_SQLITE = True
+
+## 5/2
+Trying to find 
+real WA chapter page
+> harvest actual section links
+> fetch each section
+> filter matches
+> export

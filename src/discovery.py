@@ -3,8 +3,10 @@ import re
 import time
 import requests
 from bs4 import BeautifulSoup
+from urllib.parse import urljoin, urlparse, parse_qs
 from tenacity import retry, stop_after_attempt, wait_exponential
 
+from urllib.parse import urljoin
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
@@ -260,6 +262,58 @@ def discover_wa_rcw_known_good(keyword, citations=None):
     print(f"Generated {len(candidates)} WA RCW candidates for keyword: {keyword}")
     return candidates
 
+def simple_clean_text(text):
+    return " ".join(text.split()) if text else ""
+
+
+
+def discover_wa_rcw_from_chapter_pages(keyword, chapter_pages=None):
+    chapter_pages = chapter_pages or [
+        "https://app.leg.wa.gov/rcw/default.aspx?cite=43.185A",
+    ]
+
+    candidates = []
+    seen = set()
+
+    for chapter_url in chapter_pages:
+        response = fetch_page(chapter_url)
+        soup = BeautifulSoup(response.text, "lxml")
+
+        for link in soup.find_all("a", href=True):
+            href = link["href"]
+            full_url = urljoin(chapter_url, href)
+            title = " ".join(link.get_text(" ", strip=True).split())
+
+            if "default.aspx?cite=" not in full_url:
+                continue
+
+            if "pdf=true" in full_url.lower():
+                continue
+
+            parsed = urlparse(full_url)
+            cite = parse_qs(parsed.query).get("cite", [""])[0]
+
+            # keep only full section citations like 43.185A.030
+            if not re.fullmatch(r"\d+\.\d+[A-Z]?\.\d+", cite):
+                continue
+
+            if full_url in seen:
+                continue
+            seen.add(full_url)
+
+            candidates.append({
+                "state": "WA",
+                "keyword": keyword,
+                "source_type": "code site",
+                "candidate_url": full_url,
+                "candidate_title": title if title else f"RCW {cite}",
+                "snippet": "Discovered from WA RCW chapter page",
+                "api_payload": {"chapter": ".".join(cite.split(".")[:-1])},
+            })
+
+    print(f"Generated {len(candidates)} WA RCW candidates for keyword: {keyword}")
+    return candidates
+
 def discover_candidates(search_url, keyword, state):
 
     if state == "AL":
@@ -302,6 +356,11 @@ def discover_candidates(search_url, keyword, state):
     
     
     if state == "WA":
-        return discover_wa_rcw_known_good(keyword)
+        return discover_wa_rcw_from_chapter_pages(
+            keyword,
+            chapter_pages=[
+                "https://app.leg.wa.gov/rcw/default.aspx?cite=43.185A",
+            ],
+        )
 
     return []

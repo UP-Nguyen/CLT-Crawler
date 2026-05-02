@@ -18,10 +18,10 @@ def extract_identifier_from_url(url):
         match = re.search(r"(AB|SB|ACA|SCA|AJR|SJR)(\d+)$", bill_id, re.IGNORECASE)
         if match:
             return f"{match.group(1).upper()} {match.group(2)}"
-        
+
     al_match = re.search(r"[?&]section=(\d+-\d+-\d+(?:\.\d+)?)", url, re.IGNORECASE)
     if al_match:
-        return f"Ala. Code § {al_match.group(1)}"  
+        return f"Ala. Code § {al_match.group(1)}"
 
     ny_match = re.search(r"/api/3/bills/\d{4}/([SA]\d+)", url, re.IGNORECASE)
     if ny_match:
@@ -31,13 +31,12 @@ def extract_identifier_from_url(url):
     if vt_bill_match:
         return vt_bill_match.group(1).upper()
 
-    # Vermont statute URLs like /statutes/section/24/117/04303
     vt_statute_match = re.search(r"/statutes/section/(\d+)/(\d+)/(\d+)", url, re.IGNORECASE)
     if vt_statute_match:
         title_num = vt_statute_match.group(1)
-        section_num = str(int(vt_statute_match.group(3)))  # 04303 -> 4303
+        section_num = str(int(vt_statute_match.group(3)))
         return f"{title_num} V.S.A. § {section_num}"
-    
+
     ma_bill_match = re.search(r"/Bills/(\d+)/([HS]\d+)$", url, re.IGNORECASE)
     if ma_bill_match:
         return ma_bill_match.group(2).upper()
@@ -50,12 +49,12 @@ def extract_identifier_from_url(url):
     if ma_statute_match:
         chapter_num = ma_statute_match.group(3)
         section_num = ma_statute_match.group(4)
-        return f"MGL c.{chapter_num} §{section_num}"    
+        return f"MGL c.{chapter_num} §{section_num}"
 
     wa_match = re.search(r"[?&]cite=(\d+\.\d+[A-Z]?\.\d+)", url, re.IGNORECASE)
     if wa_match:
-        return f"Wash. Rev. Code § {wa_match.group(1)}"    
-    
+        return f"Wash. Rev. Code § {wa_match.group(1)}"
+
     return None
 
 
@@ -180,6 +179,8 @@ def looks_like_real_bill(text):
         "affordable housing trust fund",
         "housing authority",
         "tax exemption",
+        "wash. rev. code",
+        "rcw",
     ]
 
     return any(signal in text_lower for signal in bill_signals) or any(signal in text_lower for signal in statute_signals)
@@ -302,12 +303,13 @@ def get_match_details(text, keyword, state=None):
                 "match_reason": "",
                 "match_terms": ma_hits,
             }
-        
+
     if state == "WA":
         wa_terms = [
             "community land trust",
             "community land trusts",
             "housing trust fund",
+            "affordable housing",
             "permanently affordable",
             "permanent affordability",
             "shared equity",
@@ -322,25 +324,19 @@ def get_match_details(text, keyword, state=None):
                 "match_terms": wa_hits,
             }
 
+        if any(term in wa_hits for term in ["housing trust fund", "affordable housing"]):
+            return {
+                "matched": True,
+                "match_reason": f"state_fallback_wa:{wa_hits[0]}",
+                "match_terms": wa_hits,
+            }
+
         if len(wa_hits) >= 2:
             return {
                 "matched": True,
                 "match_reason": f"state_fallback_wa:{', '.join(wa_hits[:2])}",
                 "match_terms": wa_hits,
             }
-
-    if len(concept_hits) >= 2:
-        return {
-            "matched": True,
-            "match_reason": f"concept_combo:{', '.join(concept_hits[:2])}",
-            "match_terms": concept_hits,
-        }
-
-    return {
-        "matched": False,
-        "match_reason": "",
-        "match_terms": concept_hits,
-    }
 
 
 def matches_keyword(text, keyword, state=None):
@@ -365,6 +361,7 @@ def is_ma_review_candidate(text):
 
     hits = [term for term in ma_review_terms if term in text_lower]
     return len(hits) >= 1, hits
+
 
 def extract_ny_api_bill(url):
     from os import getenv
@@ -409,11 +406,9 @@ def extract_page_fields(url, source_type="legislature"):
     response = fetch_page(url)
     soup = BeautifulSoup(response.text, "lxml")
 
-    # Remove obvious page chrome
     for tag in soup.select("nav, header, footer, script, style, noscript, form"):
         tag.decompose()
 
-    # Try to target the main content first
     main_selectors = [
         "main",
         "#main-content",
@@ -431,11 +426,35 @@ def extract_page_fields(url, source_type="legislature"):
             if len(candidate_text) > len(main_text):
                 main_text = candidate_text
 
-    # fallback to full page if needed
     full_text = clean_text(soup.get_text(" ", strip=True))
     text = main_text if len(main_text) > 200 else full_text
 
-    # Clean out common MA page chrome phrases
+    title_el = soup.select_one("h1, h2, .bill-title, .page-title, title")
+    title = clean_text(title_el.get_text()) if title_el else ""
+
+    if "app.leg.wa.gov/rcw/" in url.lower():
+        parsed = urlparse(url)
+        cite = parse_qs(parsed.query).get("cite", [""])[0]
+
+        text_lower_check = text.lower()
+        dead_signals = [
+            "citation not found",
+            "the citation you requested cannot be found",
+            "chapters",
+        ]
+
+        is_full_section = bool(re.fullmatch(r"\d+\.\d+[A-Z]?\.\d+", cite))
+
+        if (not is_full_section) or any(signal in text_lower_check for signal in dead_signals):
+            return {
+                "source_url": url,
+                "title": title,
+                "identifier": extract_identifier(url, title, ""),
+                "status": "Unknown",
+                "summary_snippet": "",
+                "raw_text": "",
+            }
+
     junk_phrases = [
         "skip to content",
         "mylegislature",
@@ -449,31 +468,10 @@ def extract_page_fields(url, source_type="legislature"):
         text_lower = text_lower.replace(phrase, " ")
     text = clean_text(text_lower)
 
-    # Washington dead citation pages still return 200 - remove them
-    if "app.leg.wa.gov/rcw/" in url:
-        dead_signals = [
-            "citation not found",
-            "the citation you requested cannot be found",
-        ]
-        text_lower_check = text.lower()
-        if any(signal in text_lower_check for signal in dead_signals):
-            return {
-                "source_url": url,
-                "title": "",
-                "identifier": extract_identifier(url, "", ""),
-                "status": "Unknown",
-                "summary_snippet": "",
-                "raw_text": "",
-            }
-
-    title_el = soup.select_one("h1, h2, .bill-title, .page-title, title")
-    title = clean_text(title_el.get_text()) if title_el else ""
-
     identifier = extract_identifier(url, title, text)
     status = extract_status(text)
     summary_snippet = text[:300] if text else ""
 
-    # Vermont statute cleanup
     if "/statutes/section/" in url:
         heading_candidates = soup.select("h1, h2, h3, .section-title")
         heading_text = ""
