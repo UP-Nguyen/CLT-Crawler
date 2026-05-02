@@ -233,15 +233,53 @@ def discover_al_statute_seeds(keyword):
         },
     ]
 
+def discover_wa_rcw_known_good(keyword, citations=None):
+    citations = citations or [
+        "43.185A.010",
+        "43.185A.020",
+        "43.185A.030",
+        "84.14.010",
+        "35.21.830",
+        "36.70A.540",
+    ]
 
+    candidates = []
+
+    for cite in citations:
+        url = f"https://app.leg.wa.gov/rcw/default.aspx?cite={cite}"
+        candidates.append({
+            "state": "WA",
+            "keyword": keyword,
+            "source_type": "code site",
+            "candidate_url": url,
+            "candidate_title": f"RCW {cite}",
+            "snippet": "Known-good WA RCW candidate",
+            "api_payload": {"chapter": ".".join(cite.split(".")[:-1])},
+        })
+
+    print(f"Generated {len(candidates)} WA RCW candidates for keyword: {keyword}")
+    return candidates
 
 def discover_candidates(search_url, keyword, state):
+
+    if state == "AL":
+        return discover_al_statute_seeds(keyword)
+
     if state == "CA":
         return discover_ca_bills_by_enumeration(
             keyword=keyword,
             start_num=2395,
             end_num=2405,
             bill_types=["AB"],
+        )
+
+    if state == "MA":
+        return discover_ma_bills_by_enumeration(
+            keyword=keyword,
+            general_court="194",
+            start_num=1,
+            end_num=50,
+            bill_types=["H", "S"],
         )
 
     if state == "NY":
@@ -262,16 +300,8 @@ def discover_candidates(search_url, keyword, state):
             )
         )
     
-    if state == "MA":
-        return discover_ma_bills_by_enumeration(
-            keyword=keyword,
-            general_court="194",
-            start_num=1,
-            end_num=50,
-            bill_types=["H", "S"],
-        )
     
-    if state == "AL":
-        return discover_al_statute_seeds(keyword)
+    if state == "WA":
+        return discover_wa_rcw_known_good(keyword)
 
     return []

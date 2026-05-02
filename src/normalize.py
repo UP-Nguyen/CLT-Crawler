@@ -127,6 +127,7 @@ def normalize_record(discovery_row, extracted_row):
         "source_url": extracted_row["source_url"],
         "title": extracted_row.get("title", ""),
         "identifier": extracted_row.get("identifier", ""),
+        "chapter": api_payload.get("chapter", ""),
         "status": extracted_row.get("status", "Unknown"),
         "last_seen_date": str(date.today()),
         "summary_snippet": extracted_row.get("summary_snippet", ""),

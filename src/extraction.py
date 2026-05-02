@@ -52,6 +52,10 @@ def extract_identifier_from_url(url):
         section_num = ma_statute_match.group(4)
         return f"MGL c.{chapter_num} §{section_num}"    
 
+    wa_match = re.search(r"[?&]cite=(\d+\.\d+[A-Z]?\.\d+)", url, re.IGNORECASE)
+    if wa_match:
+        return f"Wash. Rev. Code § {wa_match.group(1)}"    
+    
     return None
 
 
@@ -298,6 +302,32 @@ def get_match_details(text, keyword, state=None):
                 "match_reason": "",
                 "match_terms": ma_hits,
             }
+        
+    if state == "WA":
+        wa_terms = [
+            "community land trust",
+            "community land trusts",
+            "housing trust fund",
+            "permanently affordable",
+            "permanent affordability",
+            "shared equity",
+            "ground lease",
+        ]
+        wa_hits = [term for term in wa_terms if term in text_lower]
+
+        if "community land trust" in text_lower or "community land trusts" in text_lower:
+            return {
+                "matched": True,
+                "match_reason": "state_fallback_wa:exact_clt",
+                "match_terms": wa_hits,
+            }
+
+        if len(wa_hits) >= 2:
+            return {
+                "matched": True,
+                "match_reason": f"state_fallback_wa:{', '.join(wa_hits[:2])}",
+                "match_terms": wa_hits,
+            }
 
     if len(concept_hits) >= 2:
         return {
@@ -418,6 +448,23 @@ def extract_page_fields(url, source_type="legislature"):
     for phrase in junk_phrases:
         text_lower = text_lower.replace(phrase, " ")
     text = clean_text(text_lower)
+
+    # Washington dead citation pages still return 200 - remove them
+    if "app.leg.wa.gov/rcw/" in url:
+        dead_signals = [
+            "citation not found",
+            "the citation you requested cannot be found",
+        ]
+        text_lower_check = text.lower()
+        if any(signal in text_lower_check for signal in dead_signals):
+            return {
+                "source_url": url,
+                "title": "",
+                "identifier": extract_identifier(url, "", ""),
+                "status": "Unknown",
+                "summary_snippet": "",
+                "raw_text": "",
+            }
 
     title_el = soup.select_one("h1, h2, .bill-title, .page-title, title")
     title = clean_text(title_el.get_text()) if title_el else ""

@@ -13,7 +13,7 @@ from storage import save_csv, save_sqlite
 from pathlib import Path
 
 
-DEBUG_STATES = ["AL"]
+DEBUG_STATES = ["WA"]
 DEBUG_KEYWORDS = ["community land trust"]
 SAVE_SQLITE = False
 
@@ -142,6 +142,9 @@ def run_pipeline():
                     # Alabama code pages are valid legal sources even if they do not look like bill pages
                     if state == "AL" and candidate.get("source_type") == "code site":
                         is_real_legal_source = True
+
+                    if state == "WA" and candidate.get("source_type") == "code site":
+                        is_real_legal_source = True    
 
                     crawl_log.append({
                         "state": candidate.get("state", state),

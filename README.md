@@ -34,6 +34,8 @@ normalized findings CSV
 human review
 Airtable
 
+python src/run.py
+
 # maybe pivot
 1. Load search page
 2. Submit a real search
@@ -90,11 +92,17 @@ AL statutes by seeded title/chapter ranges
 NOTE: working as a targeted legal-source retriever, not as a self-discovering crawler. 
 
 seeded statute URLs
-> fetch
-> extract
-> match
-> export
+- fetch
+- extract
+- match
+- export
 
+## washington
+
+WA statute discovery
+- RCW section pages
+- extract + match
+- findings_export.csv
 
 
 TODO: add this to GH actions secrets
