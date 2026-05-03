@@ -1,0 +1,177 @@
+state,keyword,candidate_title,candidate_url,extracted_title,identifier,status,is_real_legal_source,matches_keyword,match_reason,match_terms,review_candidate,review_terms,error
+AR,community land trust,Search by Range,https://arkleg.state.ar.us/Bills/SearchByRange?ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Advanced Search,https://arkleg.state.ar.us/Bills/Search?ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Recent Activities,https://arkleg.state.ar.us/Bills/RecentActivities?ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Recently Filed,https://arkleg.state.ar.us/Bills/RecentlyFiled?ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Personalized Bill Tracking,https://arkleg.state.ar.us/Bills/Tracking?ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Bills Returned from Committee,https://arkleg.state.ar.us/Bills/ReturnedFromCommittee?ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Bill Conflicts Report,https://arkleg.state.ar.us/Bills/ConflictsReport?ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Legislators,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=HB#colNavLegislators,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Committees,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=HB#colNavCommittees,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Acts,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=HB#colNavActs,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Bills,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=HB#colNavBills,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Calendars,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=HB#colNavCalendars,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Arkansas Law,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=HB#colNavArkansasLaw,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Bill Tracking,https://arkleg.state.ar.us/Bills/Tracking,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,,https://arkleg.state.ar.us/Bills/ViewBills?sort=MeasureNo&by=asc&type=HB&start=0&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,,https://arkleg.state.ar.us/Bills/ViewBills?sort=MeasureNo&by=desc&type=HB&start=0&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,,https://arkleg.state.ar.us/Bills/ViewBills?sort=Sponsor&by=asc&type=HB&start=0&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,,https://arkleg.state.ar.us/Bills/ViewBills?sort=Sponsor&by=desc&type=HB&start=0&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB2005,https://arkleg.state.ar.us/Bills/Detail?id=HB2005&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB2005&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB2004,https://arkleg.state.ar.us/Bills/Detail?id=HB2004&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB2004&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB2003,https://arkleg.state.ar.us/Bills/Detail?id=HB2003&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB2003&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB2002,https://arkleg.state.ar.us/Bills/Detail?id=HB2002&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB2002&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB2001,https://arkleg.state.ar.us/Bills/Detail?id=HB2001&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB2001&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB2000,https://arkleg.state.ar.us/Bills/Detail?id=HB2000&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB2000&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1999,https://arkleg.state.ar.us/Bills/Detail?id=HB1999&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1999&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1998,https://arkleg.state.ar.us/Bills/Detail?id=HB1998&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1998&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1997,https://arkleg.state.ar.us/Bills/Detail?id=HB1997&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1997&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1996,https://arkleg.state.ar.us/Bills/Detail?id=HB1996&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1996&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1995,https://arkleg.state.ar.us/Bills/Detail?id=HB1995&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1995&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1994,https://arkleg.state.ar.us/Bills/Detail?id=HB1994&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1994&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1993,https://arkleg.state.ar.us/Bills/Detail?id=HB1993&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1993&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1992,https://arkleg.state.ar.us/Bills/Detail?id=HB1992&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1992&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1991,https://arkleg.state.ar.us/Bills/Detail?id=HB1991&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1991&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1990,https://arkleg.state.ar.us/Bills/Detail?id=HB1990&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1990&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1989,https://arkleg.state.ar.us/Bills/Detail?id=HB1989&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1989&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1988,https://arkleg.state.ar.us/Bills/Detail?id=HB1988&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1988&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1987,https://arkleg.state.ar.us/Bills/Detail?id=HB1987&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1987&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,HB1986,https://arkleg.state.ar.us/Bills/Detail?id=HB1986&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=HB1986&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,2,https://arkleg.state.ar.us/Bills/ViewBills?start=20&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,3,https://arkleg.state.ar.us/Bills/ViewBills?start=40&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,4,https://arkleg.state.ar.us/Bills/ViewBills?start=60&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,5,https://arkleg.state.ar.us/Bills/ViewBills?start=80&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,6,https://arkleg.state.ar.us/Bills/ViewBills?start=100&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,7,https://arkleg.state.ar.us/Bills/ViewBills?start=120&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,8,https://arkleg.state.ar.us/Bills/ViewBills?start=140&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,9,https://arkleg.state.ar.us/Bills/ViewBills?start=160&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,10,https://arkleg.state.ar.us/Bills/ViewBills?start=180&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,11,https://arkleg.state.ar.us/Bills/ViewBills?start=200&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,12,https://arkleg.state.ar.us/Bills/ViewBills?start=220&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,13,https://arkleg.state.ar.us/Bills/ViewBills?start=240&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,14,https://arkleg.state.ar.us/Bills/ViewBills?start=260&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,15,https://arkleg.state.ar.us/Bills/ViewBills?start=280&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,16,https://arkleg.state.ar.us/Bills/ViewBills?start=300&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,17,https://arkleg.state.ar.us/Bills/ViewBills?start=320&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,18,https://arkleg.state.ar.us/Bills/ViewBills?start=340&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,19,https://arkleg.state.ar.us/Bills/ViewBills?start=360&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,20,https://arkleg.state.ar.us/Bills/ViewBills?start=380&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,21,https://arkleg.state.ar.us/Bills/ViewBills?start=400&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,22,https://arkleg.state.ar.us/Bills/ViewBills?start=420&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,23,https://arkleg.state.ar.us/Bills/ViewBills?start=440&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,24,https://arkleg.state.ar.us/Bills/ViewBills?start=460&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,25,https://arkleg.state.ar.us/Bills/ViewBills?start=480&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,26,https://arkleg.state.ar.us/Bills/ViewBills?start=500&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,27,https://arkleg.state.ar.us/Bills/ViewBills?start=520&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,28,https://arkleg.state.ar.us/Bills/ViewBills?start=540&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,29,https://arkleg.state.ar.us/Bills/ViewBills?start=560&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,30,https://arkleg.state.ar.us/Bills/ViewBills?start=580&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,›,https://arkleg.state.ar.us/Bills/ViewBills?start=600&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,»,https://arkleg.state.ar.us/Bills/ViewBills?start=1000&type=HB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Arkansas Code,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=HB,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Session Documents,https://arkleg.state.ar.us/Bills/SessionDocuments?a=1&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Legislators,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=SB#colNavLegislators,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Committees,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=SB#colNavCommittees,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Acts,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=SB#colNavActs,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Bills,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=SB#colNavBills,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Calendars,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=SB#colNavCalendars,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Arkansas Law,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=SB#colNavArkansasLaw,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,,https://arkleg.state.ar.us/Bills/ViewBills?sort=MeasureNo&by=asc&type=SB&start=0&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,,https://arkleg.state.ar.us/Bills/ViewBills?sort=MeasureNo&by=desc&type=SB&start=0&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,,https://arkleg.state.ar.us/Bills/ViewBills?sort=Sponsor&by=asc&type=SB&start=0&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,,https://arkleg.state.ar.us/Bills/ViewBills?sort=Sponsor&by=desc&type=SB&start=0&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB647,https://arkleg.state.ar.us/Bills/Detail?id=SB647&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB647&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB646,https://arkleg.state.ar.us/Bills/Detail?id=SB646&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB646&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB645,https://arkleg.state.ar.us/Bills/Detail?id=SB645&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB645&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB644,https://arkleg.state.ar.us/Bills/Detail?id=SB644&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB644&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB643,https://arkleg.state.ar.us/Bills/Detail?id=SB643&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB643&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB642,https://arkleg.state.ar.us/Bills/Detail?id=SB642&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB642&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB641,https://arkleg.state.ar.us/Bills/Detail?id=SB641&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB641&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB640,https://arkleg.state.ar.us/Bills/Detail?id=SB640&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB640&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB639,https://arkleg.state.ar.us/Bills/Detail?id=SB639&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB639&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB638,https://arkleg.state.ar.us/Bills/Detail?id=SB638&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB638&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB637,https://arkleg.state.ar.us/Bills/Detail?id=SB637&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB637&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB636,https://arkleg.state.ar.us/Bills/Detail?id=SB636&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB636&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB635,https://arkleg.state.ar.us/Bills/Detail?id=SB635&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB635&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB634,https://arkleg.state.ar.us/Bills/Detail?id=SB634&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB634&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB633,https://arkleg.state.ar.us/Bills/Detail?id=SB633&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB633&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB632,https://arkleg.state.ar.us/Bills/Detail?id=SB632&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB632&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB631,https://arkleg.state.ar.us/Bills/Detail?id=SB631&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB631&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB630,https://arkleg.state.ar.us/Bills/Detail?id=SB630&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB630&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB629,https://arkleg.state.ar.us/Bills/Detail?id=SB629&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB629&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,SB628,https://arkleg.state.ar.us/Bills/Detail?id=SB628&ddBienniumSession=2025%2F2025R,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Status,https://arkleg.state.ar.us/Bills/Detail?id=SB628&ddBienniumSession=2025%2F2025R#status,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,2,https://arkleg.state.ar.us/Bills/ViewBills?start=20&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,3,https://arkleg.state.ar.us/Bills/ViewBills?start=40&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,4,https://arkleg.state.ar.us/Bills/ViewBills?start=60&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,5,https://arkleg.state.ar.us/Bills/ViewBills?start=80&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,6,https://arkleg.state.ar.us/Bills/ViewBills?start=100&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,7,https://arkleg.state.ar.us/Bills/ViewBills?start=120&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,8,https://arkleg.state.ar.us/Bills/ViewBills?start=140&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,9,https://arkleg.state.ar.us/Bills/ViewBills?start=160&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,10,https://arkleg.state.ar.us/Bills/ViewBills?start=180&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,11,https://arkleg.state.ar.us/Bills/ViewBills?start=200&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,12,https://arkleg.state.ar.us/Bills/ViewBills?start=220&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,13,https://arkleg.state.ar.us/Bills/ViewBills?start=240&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,14,https://arkleg.state.ar.us/Bills/ViewBills?start=260&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,15,https://arkleg.state.ar.us/Bills/ViewBills?start=280&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,16,https://arkleg.state.ar.us/Bills/ViewBills?start=300&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,17,https://arkleg.state.ar.us/Bills/ViewBills?start=320&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,18,https://arkleg.state.ar.us/Bills/ViewBills?start=340&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,19,https://arkleg.state.ar.us/Bills/ViewBills?start=360&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,20,https://arkleg.state.ar.us/Bills/ViewBills?start=380&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,21,https://arkleg.state.ar.us/Bills/ViewBills?start=400&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,22,https://arkleg.state.ar.us/Bills/ViewBills?start=420&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,23,https://arkleg.state.ar.us/Bills/ViewBills?start=440&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,24,https://arkleg.state.ar.us/Bills/ViewBills?start=460&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,25,https://arkleg.state.ar.us/Bills/ViewBills?start=480&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,26,https://arkleg.state.ar.us/Bills/ViewBills?start=500&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,27,https://arkleg.state.ar.us/Bills/ViewBills?start=520&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,28,https://arkleg.state.ar.us/Bills/ViewBills?start=540&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,29,https://arkleg.state.ar.us/Bills/ViewBills?start=560&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,30,https://arkleg.state.ar.us/Bills/ViewBills?start=580&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,›,https://arkleg.state.ar.us/Bills/ViewBills?start=600&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,»,https://arkleg.state.ar.us/Bills/ViewBills?start=640&type=SB&sort=MeasureNo&by=desc&ddBienniumSession=2025%2F2025R#SearchResults,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Arkansas Code,https://arkleg.state.ar.us/Bills/ViewBills?by=desc&ddBienniumSession=2025/2025R&sort=MeasureNo&type=SB,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Arkansas Law portal,https://arkleg.state.ar.us/ArkansasLaw,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Act 365 of 2023,https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2023R%2FPublic%2FACT365.pdf,,,,False,False,,,False,,name 'title' is not defined
+AR,community land trust,Act creating Arkansas Housing Trust Fund,https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2009%2FPublic%2F661.pdf,,,,False,False,,,False,,name 'title' is not defined

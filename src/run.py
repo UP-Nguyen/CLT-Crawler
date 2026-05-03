@@ -58,6 +58,10 @@ def run_pipeline():
                     raw_text = extracted.get("raw_text", "")
                     is_real_legal_source = looks_like_real_bill(raw_text)
 
+                    # Arkansas code/public-law pages are valid legal sources even if they do not look like bill pages
+                    if state == "AR" and candidate.get("source_type") == "code site":
+                        is_real_legal_source= True
+
                     if state in {"AL", "WA", "AR"} and candidate.get("source_type") == "code site":
                         is_real_legal_source = True
 
@@ -72,6 +76,17 @@ def run_pipeline():
                         ])
                         if len((raw_text or "").strip()) < 100:
                             match_text = fallback_text
+
+                    if state == "AR" and candidate.get("source_type") == "code site":
+                        # Arkansas statute candidates are mostly PDFs / document pages.
+                        # Use metadata aggressively because HTML extraction may be thin.
+                        match_text = " ".join([
+                            raw_text or "",
+                            candidate.get("candidate_title", ""),
+                            candidate.get("snippet", ""),
+                            extracted.get("title", ""),
+                            extracted.get("summary_snippet", ""),
+                        ])
 
                     match_details = get_match_details(match_text, keyword, state=state)
                     keyword_hit = match_details["matched"]
@@ -142,20 +157,31 @@ def run_pipeline():
                     continue
 
             subset = pd.DataFrame(crawl_log)
-            subset = subset[
-                (subset["state"] == state) &
-                (subset["keyword"] == keyword)
-            ]
-            if not subset.empty:
-                print(f"{state} | {keyword} total checked: {len(subset)}")
-                print(
-                    f"{state} | {keyword} real bills/statutes: "
-                    f"{int(subset['is_real_legal_source'].fillna(False).sum())}"
-                )
-                print(
-                    f"{state} | {keyword} keyword hits: "
-                    f"{int(subset['matches_keyword'].fillna(False).sum())}"
-                )
+
+            if not subset.empty and {"state", "keyword"}.issubset(subset.columns):
+                subset = subset[
+                    (subset["state"] == state) &
+                    (subset["keyword"] == keyword)
+                ]
+
+                if not subset.empty:
+                    print(f"{state} | {keyword} total checked: {len(subset)}")
+                    print(
+                        f"{state} | {keyword} real bills/statutes: "
+                        f"{int(subset['is_real_legal_source'].fillna(False).sum())}"
+                    )
+                    print(
+                        f"{state} | {keyword} keyword hits: "
+                        f"{int(subset['matches_keyword'].fillna(False).sum())}"
+                    )
+                else:
+                    print(f"{state} | {keyword} total checked: 0")
+                    print(f"{state} | {keyword} real bills/statutes: 0")
+                    print(f"{state} | {keyword} keyword hits: 0")
+            else:
+                print(f"{state} | {keyword} total checked: 0")
+                print(f"{state} | {keyword} real bills/statutes: 0")
+                print(f"{state} | {keyword} keyword hits: 0")
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 

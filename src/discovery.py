@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse, parse_qs
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from urllib.parse import urljoin
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
@@ -186,6 +185,7 @@ def discover_ma_bills_by_enumeration(keyword, general_court="194", start_num=1, 
     )
     return candidates
 
+
 def discover_al_statute_seeds(keyword):
     return [
         {
@@ -235,10 +235,6 @@ def discover_al_statute_seeds(keyword):
         },
     ]
 
-import re
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-
 
 def discover_ar_bills_from_listing(keyword, listing_urls=None):
     listing_urls = listing_urls or [
@@ -258,11 +254,11 @@ def discover_ar_bills_from_listing(keyword, listing_urls=None):
             full_url = urljoin(listing_url, href)
             link_text = " ".join(link.get_text(" ", strip=True).split())
 
-            # Arkansas bill detail pages usually live under /Bills/Detail or similar bill paths
-            if "/Bills/" not in full_url:
+            if "/Bills/Detail" not in full_url:
                 continue
 
-            # avoid PDFs for now
+            full_url = full_url.split("#")[0]
+
             if full_url.lower().endswith(".pdf") or "ftpdocument" in full_url.lower():
                 continue
 
@@ -270,29 +266,31 @@ def discover_ar_bills_from_listing(keyword, listing_urls=None):
                 continue
             seen.add(full_url)
 
+            parent = link.find_parent("tr")
+            row_text = " ".join(parent.get_text(" ", strip=True).split()) if parent else ""
+
             candidates.append({
                 "state": "AR",
                 "keyword": keyword,
                 "source_type": "legislature site",
                 "candidate_url": full_url,
                 "candidate_title": link_text,
-                "snippet": "Discovered from Arkansas bill listing",
+                "snippet": row_text[:300],
                 "api_payload": None,
             })
 
     print(f"Generated {len(candidates)} AR bill candidates for keyword: {keyword}")
     return candidates
 
-
-def discover_ar_statute_seeds(keyword):
+def discover_ar_manual_statute_candidates(keyword):
     return [
         {
             "state": "AR",
             "keyword": keyword,
             "source_type": "code site",
-            "candidate_url": "https://arkleg.state.ar.us/ArkansasLaw",
-            "candidate_title": "Arkansas Law portal",
-            "snippet": "Official Arkansas law portal",
+            "candidate_url": "https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2009%2FPublic%2FACT661.pdf",
+            "candidate_title": "Arkansas Housing Trust Fund Act of 2009",
+            "snippet": "Creates the Arkansas Housing Trust Fund and adds Ark. Code Ann. §§ 15-5-1701 through 15-5-1706.",
             "api_payload": None,
         },
         {
@@ -301,51 +299,19 @@ def discover_ar_statute_seeds(keyword):
             "source_type": "code site",
             "candidate_url": "https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2023R%2FPublic%2FACT365.pdf",
             "candidate_title": "Act 365 of 2023",
-            "snippet": "Amends Arkansas Housing Trust Fund provisions including § 15-5-1705(c)",
+            "snippet": "Amends Arkansas Housing Trust Fund provisions, including Ark. Code Ann. § 15-5-1705(c).",
             "api_payload": None,
         },
         {
             "state": "AR",
             "keyword": keyword,
             "source_type": "code site",
-            "candidate_url": "https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2009%2FPublic%2F661.pdf",
-            "candidate_title": "Act creating Arkansas Housing Trust Fund",
-            "snippet": "Creates Arkansas Housing Trust Fund; references § 15-5-1704",
+            "candidate_url": "https://arkleg.state.ar.us/Home/FTPDocument?path=%2FAssembly%2FMeeting+Attachments%2F040%2F4596%2FE.2.a+DOC+ADFA+2021+ADFA+Qualified+Allocation+Plan+Rules.pdf",
+            "candidate_title": "ADFA Qualified Allocation Plan Rules",
+            "snippet": "References the Affordable Neighborhood Housing Tax Credit Act of 1997 and Ark. Code Ann. § 15-5-1301 et seq.",
             "api_payload": None,
         },
     ]
-
-def discover_wa_rcw_known_good(keyword, citations=None):
-    citations = citations or [
-        "43.185A.010",
-        "43.185A.020",
-        "43.185A.030",
-        "84.14.010",
-        "35.21.830",
-        "36.70A.540",
-    ]
-
-    candidates = []
-
-    for cite in citations:
-        url = f"https://app.leg.wa.gov/rcw/default.aspx?cite={cite}"
-        candidates.append({
-            "state": "WA",
-            "keyword": keyword,
-            "source_type": "code site",
-            "candidate_url": url,
-            "candidate_title": f"RCW {cite}",
-            "snippet": "Known-good WA RCW candidate",
-            "api_payload": {"chapter": ".".join(cite.split(".")[:-1])},
-        })
-
-    print(f"Generated {len(candidates)} WA RCW candidates for keyword: {keyword}")
-    return candidates
-
-def simple_clean_text(text):
-    return " ".join(text.split()) if text else ""
-
-
 
 def discover_wa_rcw_from_chapter_pages(keyword, chapter_pages=None):
     chapter_pages = chapter_pages or [
@@ -362,7 +328,7 @@ def discover_wa_rcw_from_chapter_pages(keyword, chapter_pages=None):
         for link in soup.find_all("a", href=True):
             href = link["href"]
             full_url = urljoin(chapter_url, href)
-            title = " ".join(link.get_text(" ", strip=True).split())
+            title = " ".join(link.get_text(" ", strip=True).split()).lower()
 
             if "default.aspx?cite=" not in full_url:
                 continue
@@ -370,11 +336,17 @@ def discover_wa_rcw_from_chapter_pages(keyword, chapter_pages=None):
             if "pdf=true" in full_url.lower():
                 continue
 
+            if title == "pdf":
+                continue
+
             parsed = urlparse(full_url)
             cite = parse_qs(parsed.query).get("cite", [""])[0]
 
-            # keep only full section citations like 43.185A.030
             if not re.fullmatch(r"\d+\.\d+[A-Z]?\.\d+", cite):
+                continue
+
+            section_part = cite.split(".")[-1]
+            if re.fullmatch(r"9\d\d", section_part):
                 continue
 
             if full_url in seen:
@@ -386,7 +358,7 @@ def discover_wa_rcw_from_chapter_pages(keyword, chapter_pages=None):
                 "keyword": keyword,
                 "source_type": "code site",
                 "candidate_url": full_url,
-                "candidate_title": title if title else f"RCW {cite}",
+                "candidate_title": f"RCW {cite}",
                 "snippet": "Discovered from WA RCW chapter page",
                 "api_payload": {"chapter": ".".join(cite.split(".")[:-1])},
             })
@@ -394,10 +366,13 @@ def discover_wa_rcw_from_chapter_pages(keyword, chapter_pages=None):
     print(f"Generated {len(candidates)} WA RCW candidates for keyword: {keyword}")
     return candidates
 
-def discover_candidates(search_url, keyword, state):
 
+def discover_candidates(search_url, keyword, state):
     if state == "AL":
         return discover_al_statute_seeds(keyword)
+
+    if state == "AR":
+        return discover_ar_manual_statute_candidates(keyword)
 
     if state == "CA":
         return discover_ca_bills_by_enumeration(
@@ -424,29 +399,20 @@ def discover_candidates(search_url, keyword, state):
         )
 
     if state == "VT":
-        return (
-            discover_vt_bills_by_enumeration(
-                keyword=keyword,
-                sessions=["2026", "2024"],
-                start_num=1,
-                end_num=100,
-                bill_types=["H", "S"],
-            )
+        return discover_vt_bills_by_enumeration(
+            keyword=keyword,
+            sessions=["2026", "2024"],
+            start_num=1,
+            end_num=100,
+            bill_types=["H", "S"],
         )
-    
-    
+
     if state == "WA":
         return discover_wa_rcw_from_chapter_pages(
             keyword,
             chapter_pages=[
                 "https://app.leg.wa.gov/rcw/default.aspx?cite=43.185A",
             ],
-        )
-
-    if state == "AR":
-        return (
-            discover_ar_bills_from_listing(keyword)
-            + discover_ar_statute_seeds(keyword)
         )
 
     return []

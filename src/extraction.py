@@ -22,14 +22,6 @@ def extract_identifier_from_url(url):
     al_match = re.search(r"[?&]section=(\d+-\d+-\d+(?:\.\d+)?)", url, re.IGNORECASE)
     if al_match:
         return f"Ala. Code § {al_match.group(1)}"
-    
-    ar_bill_match = re.search(r"\b(HB|SB)\d+\b", title, re.IGNORECASE)
-    if ar_bill_match:
-        return ar_bill_match.group(0).upper()
-
-    ar_code_match = re.search(r"Ark\.?\s*Code\.?\s*(?:Ann\.)?\s*§\s*(\d+-\d+-\d+(?:\.\d+)?)", text, re.IGNORECASE)
-    if ar_code_match:
-        return f"Ark. Code Ann. § {ar_code_match.group(1)}"    
 
     ny_match = re.search(r"/api/3/bills/\d{4}/([SA]\d+)", url, re.IGNORECASE)
     if ny_match:
@@ -82,6 +74,10 @@ def extract_identifier_from_title(title):
     if vt_match:
         return f"{vt_match.group(1).upper()}.{vt_match.group(2)}"
 
+    ar_bill_match = re.search(r"\b(HB|SB)\d+\b", title, re.IGNORECASE)
+    if ar_bill_match:
+        return ar_bill_match.group(0).upper()
+
     return None
 
 
@@ -115,6 +111,14 @@ def extract_identifier_from_text(text):
 
         if pattern_type == "citation":
             return f"c. {match.group(1)}"
+
+    ar_code_match = re.search(
+        r"Ark\.?\s*Code\.?\s*(?:Ann\.)?\s*§\s*(\d+-\d+-\d+(?:\.\d+)?)",
+        text,
+        re.IGNORECASE,
+    )
+    if ar_code_match:
+        return f"Ark. Code Ann. § {ar_code_match.group(1)}"
 
     return None
 
@@ -292,9 +296,21 @@ def get_match_details(text, keyword, state=None):
                 "match_reason": f"state_fallback_al:{al_hits[0]}",
                 "match_terms": al_hits,
             }
-        
+
     if state == "AR":
-        ar_terms = [
+        direct_terms = [
+            "community land trust",
+            "community land trusts",
+            "land trust",
+            "shared equity",
+            "shared-equity",
+            "ground lease",
+            "permanently affordable",
+            "arkansas housing trust fund act",
+            "affordable neighborhood housing tax credit act",
+        ]
+
+        supportive_terms = [
             "affordable housing",
             "housing trust fund",
             "arkansas housing trust fund",
@@ -302,15 +318,33 @@ def get_match_details(text, keyword, state=None):
             "tax credit",
             "housing authority",
             "low income housing",
+            "low-income housing",
+            "housing development",
+            "workforce housing",
+            "redevelopment",
+            "homeownership",
+            "rental housing",
+            "multifamily housing",
+            "property tax exemption",
+            "qualified allocation plan",
         ]
-        ar_hits = [term for term in ar_terms if term in text_lower]
 
-        if len(ar_hits) >= 1:
+        direct_hits = [term for term in direct_terms if term in text_lower]
+        supportive_hits = [term for term in supportive_terms if term in text_lower]
+
+        if direct_hits:
             return {
                 "matched": True,
-                "match_reason": f"state_fallback_ar:{ar_hits[0]}",
-                "match_terms": ar_hits,
-            }        
+                "match_reason": f"state_direct_ar:{direct_hits[0]}",
+                "match_terms": direct_hits,
+            }
+
+        if len(supportive_hits) >= 2:
+            return {
+                "matched": True,
+                "match_reason": f"state_fallback_ar:{supportive_hits[0]}",
+                "match_terms": supportive_hits,
+            }
 
     if state == "MA":
         ma_terms = [
@@ -473,8 +507,26 @@ def extract_page_fields(url, source_type="legislature"):
     full_text = clean_text(soup.get_text(" ", strip=True))
     text = main_text if len(main_text) > 200 else full_text
 
+    # define early so no later branch can fail
     title_el = soup.select_one("h1, h2, .bill-title, .page-title, title")
     title = clean_text(title_el.get_text()) if title_el else ""
+
+    junk_phrases = [
+        "skip to content",
+        "mylegislature",
+        "sign in with mylegislature account",
+        "the 194th general court of the commonwealth of massachusetts",
+        "email* password*",
+        "march 23, 2026",
+    ]
+    text_lower = text.lower()
+    for phrase in junk_phrases:
+        text_lower = text_lower.replace(phrase, " ")
+    text = clean_text(text_lower)
+
+    identifier = extract_identifier(url, title, text)
+    status = extract_status(text)
+    summary_snippet = text[:300] if text else ""
 
     if "app.leg.wa.gov/rcw/" in url.lower():
         parsed = urlparse(url)
@@ -493,28 +545,11 @@ def extract_page_fields(url, source_type="legislature"):
             return {
                 "source_url": url,
                 "title": title,
-                "identifier": extract_identifier(url, title, ""),
+                "identifier": identifier,
                 "status": "Unknown",
                 "summary_snippet": "",
                 "raw_text": "",
             }
-
-    junk_phrases = [
-        "skip to content",
-        "mylegislature",
-        "sign in with mylegislature account",
-        "the 194th general court of the commonwealth of massachusetts",
-        "email* password*",
-        "march 23, 2026",
-    ]
-    text_lower = text.lower()
-    for phrase in junk_phrases:
-        text_lower = text_lower.replace(phrase, " ")
-    text = clean_text(text_lower)
-
-    identifier = extract_identifier(url, title, text)
-    status = extract_status(text)
-    summary_snippet = text[:300] if text else ""
 
     if "/statutes/section/" in url:
         heading_candidates = soup.select("h1, h2, h3, .section-title")

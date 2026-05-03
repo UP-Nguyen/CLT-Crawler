@@ -1,0 +1,4 @@
+state,keyword,candidate_title,candidate_url,extracted_title,identifier,status,is_real_legal_source,matches_keyword,match_reason,match_terms,review_candidate,review_terms
+AR,community land trust,Arkansas Code and Constitution of 1874,https://arkleg.state.ar.us/ArkansasLaw,Arkansas Law - Arkansas State Legislature,,Unknown,True,False,,,False,
+AR,community land trust,Arkansas public act,https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2023R%2FPublic%2FACT365.pdf,,SB 2,Unknown,True,False,,,False,
+AR,community land trust,Arkansas public act,https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2009%2FPublic%2F661.pdf,,,Unknown,True,False,,,False,
